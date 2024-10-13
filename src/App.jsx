@@ -1,7 +1,24 @@
+import { useEffect, useState } from "react";
+import { Tasks } from "./models/Tasks";
+
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const taskstable = new Tasks();
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
+  const getTasks = async () => {
+    taskstable.getAll(setTasks);
+  };
+
   return (
     <>
-      <h1 className="bg-red-500">To-Do App</h1>
+      {tasks.length != 0
+        ? tasks.map((task) => <p key={task.id}>task: {task.title}</p>)
+        : "sin tareas"}
     </>
   );
 }
