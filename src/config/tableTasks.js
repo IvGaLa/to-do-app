@@ -5,23 +5,43 @@ export const tasks = {
   fields: {
     id: {
       name: 'id',
-      type: 'integer'
+      type: 'integer',
+      label: 'Id'
+    },
+    user: {
+      name: 'user',
+      type: 'text',
+      label: 'Usuario'
     },
     title: {
       name: 'title',
-      type: 'text'
+      type: 'text',
+      label: 'Título'
     },
     description: {
       name: 'description',
-      type: 'text'
+      type: 'text',
+      label: 'Descripción'
     },
-    active: {
-      name: 'active',
-      type: 'integer'
+    finished: {
+      name: 'finished',
+      type: 'integer',
+      label: 'Completada'
     },
-    created: {
-      name: 'created',
-      type: 'integer'
+    createdAt: {
+      name: 'createdAt',
+      type: 'integer',
+      label: 'Creada'
+    },
+    modifiedAt: {
+      name: 'modifiedAt',
+      type: 'integer',
+      label: 'Modificada'
+    },
+    finishedAt: {
+      name: 'finishedAt',
+      type: 'integer',
+      label: 'Finalizada'
     }
   }
 }
