@@ -13,6 +13,14 @@ function Header() {
                 href="#"
                 className="inline-block px-4 hover:text-textsecondary duration-200"
               >
+                Inicio
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="inline-block px-4 hover:text-textsecondary duration-200"
+              >
                 Añadir
               </a>
             </li>
