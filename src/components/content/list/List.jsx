@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Tasks } from "../../models/Tasks";
+import { Tasks } from "../../../models/Tasks";
 import Task from "./Task";
 
 function List() {

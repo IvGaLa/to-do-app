@@ -1,7 +1,5 @@
-//import { useEffect, useState } from "react";
-//import { Tasks } from "./models/Tasks";
 import Layout from "./components/Layout";
-import List from "./components/content/List";
+import List from "./components/content/list/List";
 
 function App() {
   return (
