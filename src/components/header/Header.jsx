@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <header className="bg-gray-800 text-white p-4">
@@ -9,28 +11,28 @@ function Header() {
         <div className="flex justify-center">
           <ul className="sm:flex hidden items-center gap-4">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="inline-block px-4 hover:text-textsecondary duration-200"
               >
                 Inicio
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/add"
                 className="inline-block px-4 hover:text-textsecondary duration-200"
               >
                 Añadir
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/list"
                 className="inline-block px-4 hover:text-textsecondary duration-200"
               >
                 Listar
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
