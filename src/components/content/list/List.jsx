@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Tasks } from "../../../models/Tasks";
 import Task from "./Task";
 import { Link } from "react-router-dom";
+import { getLocale } from "../../../locale/es";
 
 function List() {
   const [tasks, setTasks] = useState([]);
@@ -18,18 +19,21 @@ function List() {
   };
 
   return (
-    <>
-      {tasks.length != 0 ? (
+    <div>
+      <h2>{getLocale("pages.list.title")}</h2>
+      {tasks.length !== 0 ? (
         <Task tasks={tasks} setTasks={setTasks} />
       ) : (
-        <>
-          <p>Aún no dispones de tareas creadas.</p>
+        <div>
+          <p>{getLocale("pages.list.withouttasks")}</p>
           <p>
-            Hazl click <Link to="/add">aquí</Link> para añadir tu primera tarea.
+            {getLocale("pages.list.click")}{" "}
+            <Link to="/add">{getLocale("pages.list.here")}</Link>{" "}
+            {getLocale("pages.list.addnewtask")}
           </p>
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

@@ -1,5 +1,4 @@
-import { LuArrowDown } from "react-icons/lu";
-import { LuArrowUp } from "react-icons/lu";
+import { GrLinkDown, GrLinkUp } from "react-icons/gr";
 
 function Th({ sortBy, handlerSorting, sortOrder, children }) {
   return (
@@ -9,9 +8,9 @@ function Th({ sortBy, handlerSorting, sortOrder, children }) {
     >
       {children}
       {sortOrder[sortBy] === 1 ? (
-        <LuArrowUp className="inline mx-1" />
+        <GrLinkUp className="inline mx-1" />
       ) : (
-        <LuArrowDown className="inline mx-1" />
+        <GrLinkDown className="inline mx-1" />
       )}
     </th>
   );
