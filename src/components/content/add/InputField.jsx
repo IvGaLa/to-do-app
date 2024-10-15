@@ -1,4 +1,4 @@
-function InputField({ formData, handlerChange, name }) {
+function InputField({ formData, handlerChange, name, validationErrors }) {
   return (
     <div>
       <label className="text-gray-700 dark:text-gray-200" htmlFor={name}>
@@ -11,6 +11,7 @@ function InputField({ formData, handlerChange, name }) {
         value={formData[name].value || ""} // Asegura que siempre tenga un valor, por defecto vacío
         onChange={(e) => handlerChange(e)}
       />
+      {validationErrors[name] && <span>{validationErrors[name]}</span>}
     </div>
   );
 }

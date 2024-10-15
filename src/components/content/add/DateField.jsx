@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function DateField({ name, handlerChange }) {
+function DateField({ name, handlerChange, formData }) {
   const [dateAt, setDateAt] = useState("");
 
   const handlerDate = (date) => {
@@ -11,7 +11,7 @@ function DateField({ name, handlerChange }) {
   return (
     <div>
       <label className="text-gray-700 dark:text-gray-200" htmlFor={name}>
-        {name}
+        {formData[name].label}
       </label>
       <input
         type="datetime-local"

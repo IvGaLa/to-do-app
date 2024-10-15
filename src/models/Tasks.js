@@ -30,14 +30,9 @@ export class Tasks {
       return field.value
     }).join('", "')
 
-    const sql = 'INSERT INTO ":table" (:fields) VALUES (:values);'
-    await dbCon.execute({
-      sql,
-      args: {
-        table: this.name,
-        fields,
-        values
-      }
-    })
+
+    const sql = `INSERT INTO "${this.table}" ("${fields}") VALUES ("${values}");`
+
+    await dbCon.execute(sql)
   }
 }
