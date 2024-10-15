@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 function List() {
   const [tasks, setTasks] = useState([]);
 
-  const taskModel = new Tasks();
+  const tasksModel = new Tasks();
 
   useEffect(() => {
     getTasks();
   }, []);
 
   const getTasks = async () => {
-    const rows = await taskModel.getAll();
+    const rows = await tasksModel.getAll();
     setTasks(rows);
   };
 

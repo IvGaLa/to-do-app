@@ -31,7 +31,7 @@ export const tasks = {
       name: 'finished',
       type: 'integer',
       label: 'Completada',
-      value: ''
+      value: 0
     },
     createdAt: {
       name: 'createdAt',
