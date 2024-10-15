@@ -8,7 +8,6 @@ function Th({ sortBy, handlerSorting, sortOrder, children }) {
       className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 hover:cursor-pointer"
     >
       {children}
-      {/* <LuArrowUpDown className="inline mx-1" /> */}
       {sortOrder[sortBy] === 1 ? (
         <LuArrowUp className="inline mx-1" />
       ) : (

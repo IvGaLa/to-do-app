@@ -3,13 +3,15 @@ import { dbCon } from "../config/dbConnect";
 
 export class Tasks {
   constructor() {
-    this.name = configData.tables.tasks.name
+    this.table = configData.tables.tasks.name
+  }
+  async getAll() {
+    const sql = `SELECT * FROM ${this.table}`
+    const response = await dbCon.execute(sql);
+    return response.rows;
   }
 
-  async getAll(setResults) {
-    const sql = `SELECT * FROM ${this.name}`
-    const response = await dbCon.execute(sql);
-    setResults(response.rows)
-    return true;
-  }
+  // async add(data) {
+  //   const sql = `INSERT INTO ${this.table}`
+  // }
 }

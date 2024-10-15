@@ -6,42 +6,50 @@ export const tasks = {
     id: {
       name: 'id',
       type: 'integer',
-      label: 'Id'
+      label: 'Id',
+      value: ''
     },
     user: {
       name: 'user',
       type: 'text',
-      label: 'Usuario'
+      label: 'Usuario',
+      value: ''
     },
     title: {
       name: 'title',
       type: 'text',
-      label: 'Título'
+      label: 'Título',
+      value: ''
     },
     description: {
       name: 'description',
       type: 'text',
-      label: 'Descripción'
+      label: 'Descripción',
+      value: ''
     },
     finished: {
       name: 'finished',
       type: 'integer',
-      label: 'Completada'
+      label: 'Completada',
+      value: ''
     },
     createdAt: {
       name: 'createdAt',
       type: 'integer',
-      label: 'Creada'
+      label: 'Creada',
+      value: ''
     },
     modifiedAt: {
       name: 'modifiedAt',
       type: 'integer',
-      label: 'Modificada'
+      label: 'Modificada',
+      value: ''
     },
     finishedAt: {
       name: 'finishedAt',
       type: 'integer',
-      label: 'Finalizada'
+      label: 'Finalizada',
+      value: ''
     }
   }
 }
