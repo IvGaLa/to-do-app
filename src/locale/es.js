@@ -1,6 +1,6 @@
 import { localstorage } from "./localstorage";
-import { add } from "./pages.add";
-import { list } from "./pages.list";
+import { add } from "./components.content.add";
+import { list } from "./components.content.list";
 import { errors } from "./validations.errors";
 
 // Guardamos todos los textos disponibles en la aplicación
