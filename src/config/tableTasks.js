@@ -1,5 +1,8 @@
-import { getLocale } from "../locale/es"
 import { tableNames } from "./tableNames"
+import { validationTypes } from "./validationsTypes"
+
+const { required, integer, bool, datetime, maxLength } = validationTypes
+
 
 export const tasks = {
   name: tableNames.tasks,
@@ -10,14 +13,8 @@ export const tasks = {
       label: 'Id',
       value: '',
       validation: {
-        required: {
-          value: true,
-          message: getLocale('validations.errors.required')
-        },
-        integer: {
-          value: true,
-          message: getLocale('validations.errors.integer')
-        }
+        required,
+        integer,
       }
     },
     user: {
@@ -26,10 +23,7 @@ export const tasks = {
       label: 'Usuario',
       value: '',
       validation: {
-        required: {
-          value: true,
-          message: getLocale('validations.errors.required')
-        }
+        required,
       }
     },
     title: {
@@ -38,18 +32,9 @@ export const tasks = {
       label: 'Título',
       value: '',
       validation: {
-        required: {
-          value: true,
-          message: getLocale('validations.errors.required')
-        },
-        integer: {
-          value: true,
-          message: getLocale('validations.errors.integer')
-        },
-        maxLength: {
-          value: 20,
-          message: getLocale('validations.errors.maxLength')
-        }
+        required,
+        integer,
+        maxLength,
       }
     },
     description: {
@@ -58,18 +43,9 @@ export const tasks = {
       label: 'Descripción',
       value: '',
       validation: {
-        required: {
-          value: true,
-          message: getLocale('validations.errors.required')
-        },
-        integer: {
-          value: true,
-          message: getLocale('validations.errors.integer')
-        },
-        maxLength: {
-          value: 100,
-          message: getLocale('validations.errors.maxLength')
-        }
+        required,
+        integer,
+        maxLength,
       }
     },
     finished: {
@@ -78,10 +54,7 @@ export const tasks = {
       label: 'Completada',
       value: 0,
       validation: {
-        bool: {
-          value: true,
-          message: getLocale('validations.errors.bool')
-        }
+        bool,
       }
     },
     createdAt: {
@@ -90,10 +63,7 @@ export const tasks = {
       label: 'Creada',
       value: '',
       validation: {
-        datetime: {
-          value: /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, // Expresión regular para el formato YYYY-MM-DDTHH:MM
-          message: getLocale('validations.errors.datetime')
-        }
+        datetime,
       }
     },
     modifiedAt: {
@@ -102,10 +72,7 @@ export const tasks = {
       label: 'Modificada',
       value: '',
       validation: {
-        datetime: {
-          value: /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, // Expresión regular para el formato YYYY-MM-DDTHH:MM
-          message: getLocale('validations.errors.datetime')
-        }
+        datetime,
       }
     },
     finishedAt: {
@@ -114,10 +81,7 @@ export const tasks = {
       label: 'Finalizada',
       value: '',
       validation: {
-        datetime: {
-          value: /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, // Expresión regular para el formato YYYY-MM-DDTHH:MM
-          message: getLocale('validations.errors.datetime')
-        }
+        datetime,
       }
     }
   }
