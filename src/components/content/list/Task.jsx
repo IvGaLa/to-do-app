@@ -5,6 +5,7 @@ import { sortBy, sortType } from "../../../lib/sorting";
 import Th from "./Th";
 import { tasks as tasksFields } from "../../../config/tableTasks";
 import { getLocale } from "../../../locale/es";
+import TdDate from "./TdDate";
 
 function Task({ tasks, setTasks }) {
   const handlerSorting = (orderBy) => {
@@ -56,15 +57,9 @@ function Task({ tasks, setTasks }) {
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                 {task.description}
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {task.createdAt}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {task.modifiedAt}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {task.finishedAt}
-              </td>
+              <TdDate date={task.createdAt} />
+              <TdDate date={task.modifiedAt} />
+              <TdDate date={task.finishedAt} />
               <td>
                 <div className="flex justify-between">
                   <GrEdit />
