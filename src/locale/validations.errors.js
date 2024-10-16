@@ -4,4 +4,5 @@ export const errors = {
   maxLength: 'El campo %field% no puede tener mas de %value% carácteres.',
   bool: 'El campo %field% debe ser verdadero o falso.',
   datetime: 'El formato del campo %field% no es correcto',
+  pattern: 'El campo no se adapta al formato esperado.' // Este mensaje es genérico ya que no sabemos qué regexp se utilizará.
 }

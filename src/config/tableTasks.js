@@ -33,8 +33,7 @@ export const tasks = {
       value: '',
       validation: {
         required,
-        integer,
-        maxLength,
+        maxLength: { ...maxLength, value: 25 }, // Por defecto el maxLength es 20, lo cambiamos a 25
       }
     },
     description: {
@@ -44,8 +43,7 @@ export const tasks = {
       value: '',
       validation: {
         required,
-        integer,
-        maxLength,
+        maxLength: { ...maxLength, value: 100 },
       }
     },
     finished: {

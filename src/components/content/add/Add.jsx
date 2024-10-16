@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { tasks } from "../../../config/tableTasks";
@@ -10,104 +10,154 @@ import { getLocale } from "../../../locale/es";
 import { DateTime } from "luxon";
 
 function Add() {
-  //El id no lo queremos en el formulario de añadir.
-  const { ...fields } = tasks.fields;
-  delete fields.id;
+  /**
+   *
+   * Elimina el campo 'id' que no será usado en el formulario
+   *
+   */
+  const { id, ...initialFields } = tasks.fields;
 
-  const [formData, setFormData] = useState(fields);
-
+  /**
+   *
+   * Declaración de estados
+   *
+   */
+  const [formData, setFormData] = useState(initialFields);
   const [newUserId, setNewUserId] = useState(false);
-
   const [resultAdd, setResultAdd] = useState("");
-
   const [validationErrors, setValidationErrors] = useState({});
 
-  const resetValues = () => {
-    const { user, finished, ...fieldsToReset } = formData;
-    const reset = Object.keys(fieldsToReset).reduce((field, key) => {
-      field[key] = { ...fieldsToReset[key], value: null };
-      return field;
-    }, {});
-    reset[fields.user.name] = { ...user }; // Asignamos el usuario ya que es un campo oculto y lo hemos reseteado
-    reset[fields.finished.name] = { ...finished }; // Lo mismo que con el campo finished
-
-    setFormData(reset); // Limpiamos el formulario
-    setValidationErrors({}); // Limpiamos los errores
-  };
-
-  // Campos tipo texto para el formulario
-  const columnsText = [fields.title.name, fields.description.name].map(
-    (field) => fields[field]
-  );
-
-  // Campos tipo fecha/hora para el formulario
-  const columnsDate = [
-    fields.createdAt.name,
-    fields.modifiedAt.name,
-    fields.finishedAt.name,
-  ].map((field) => fields[field]);
-
-  const handlerForm = async (e) => {
-    e.preventDefault(); // Invalidamos el envío predeterminado del formulario
-
-    // Si no se ha establecido fecha de creación, le asignamos la fecha/hora actual.
-    if (formData.createdAt.value === null || formData.createdAt.value === "") {
-      const currentDateTime = DateTime.now().toFormat("yyyy-LL-dd'T'HH:mm");
-      const newFormData = {
-        ...formData,
-        createdAt: { ...formData.createdAt, value: currentDateTime },
-      };
-      setFormData(newFormData);
-    }
-
-    const errors = validateForm(formData); // Validamos los datos del formulario
-
-    // Si hay errors, los mostramos.
-    if (Object.keys(errors).length > 0) {
-      setValidationErrors(errors);
-      return;
-    }
-    // Enviar datos
-    const tasksModel = new Tasks();
-    const response = await tasksModel.add(formData);
-
-    const { lastInsertRowid } = response;
-
-    const lastInsertTask = await tasksModel.getTaskById(lastInsertRowid);
-
-    setResultAdd(lastInsertTask);
-
-    resetValues(); // Reseteamos el formulario
-  };
-
-  const handlerChange = (e) => {
-    const { name, value } = e.target;
-    const newFieldsForm = { ...formData };
-    newFieldsForm[name].value = value;
-    setFormData(newFieldsForm);
-  };
-
-  // Comprobamos si el usuario tiene un userid creado en localstorage, si no lo tiene le asignamos uno nuevo.
-  useEffect(() => {
-    // Nos aseguramos de borrar el formulario
-    resetValues();
-
-    const userId = localStorage.getItem(getLocale("localstorage.userid"))
-      ? localStorage.getItem(getLocale("localstorage.userid"))
-      : getNewUserId();
-
-    const newFieldsForm = { ...formData };
-    newFieldsForm[fields.user.name].value = userId;
-    setFormData(newFieldsForm);
-  }, []);
-
-  // Creamos y setemoas un nuevo user id.
-  const getNewUserId = () => {
+  /**
+   *
+   * Función para generar un nuevo User ID si no existe
+   *
+   */
+  const getNewUserId = useCallback(() => {
     const userid = uuidv4();
     localStorage.setItem(getLocale("localstorage.userid"), userid);
     setNewUserId(true);
     return userid;
+  }, []);
+
+  /**
+   *
+   * Función para resetear el formulario
+   *
+   */
+  const resetValues = useCallback(() => {
+    // Guardamos la fecha y hora actual, lo usamos para el createAt
+    const currentDateTime = DateTime.now().toFormat("yyyy-LL-dd'T'HH:mm");
+
+    const resetFields = Object.keys(formData).reduce((acc, key) => {
+      acc[key] = { ...formData[key], value: null };
+      return acc;
+    }, {});
+
+    // Seteamos los datos del formulario
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ...resetFields,
+      [initialFields.user.name]: {
+        ...initialFields.user,
+        value:
+          localStorage.getItem(getLocale("localstorage.userid")) || // Si existe, cogemos el userid del localstorage
+          getNewUserId(), // Si no existe generamos unos nuevo.
+      },
+      [initialFields.finished.name]: {
+        ...initialFields.finished,
+        value: 0,
+      },
+      [initialFields.createdAt.name]: {
+        ...initialFields.createdAt,
+        value: currentDateTime,
+      },
+    }));
+
+    // Vaciamos los errores que puedan haber.
+    setValidationErrors({});
+  }, [formData]);
+
+  /**
+   *
+   * Manejador del cambio en los campos del formulario
+   *
+   */
+  const handleInputChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: { ...prevFormData[name], value },
+    }));
+  }, []);
+
+  /**
+   *
+   * Manejador del envío del formulario
+   *
+   */
+  const handleFormSubmit = async (e) => {
+    // Evitamos el envío del formulario
+    e.preventDefault();
+
+    // Realizamos la validación del formulario
+    const errors = validateForm(formData);
+    if (Object.keys(errors).length > 0) {
+      // Si hay errores, los seteamos para mostrarlos y salimos
+      setValidationErrors(errors);
+      return;
+    }
+
+    // Instanciamos el modelo de la tabla tasks
+    const tasksModel = new Tasks();
+
+    // Añadimos la tarea a la base de datos.
+    const response = await tasksModel.add(formData);
+
+    // Recuperamos el id asignado (Lo devuelve la consulta)
+    const { lastInsertRowid } = response;
+
+    // Recuperamos la tarea añadida
+    const lastInsertTask = await tasksModel.getTaskById(lastInsertRowid);
+
+    // Guardamos para mostrar la tarea añadida
+    setResultAdd(lastInsertTask);
+
+    // Borramos los datos del formulario.
+    resetValues();
   };
+
+  /**
+   *
+   * useEffect para resetear el formulario
+   *
+   */
+  useEffect(() => {
+    // Reseteamos el formulario
+    resetValues();
+  }, []);
+
+  /**
+   *
+   * Campos de texto para el formulario
+   * Esto lo utilizo para crear un map y llamar un componente personalizado por cada campo de texto del formulario
+   *
+   */
+  const columnsText = [
+    initialFields.title.name,
+    initialFields.description.name,
+  ].map((field) => initialFields[field]);
+
+  /**
+   *
+   * Campos de fecha para el formulario
+   * Lo mismo que arriba pero para los campos tipo fecha/hora a mostrar en el formulario
+   *
+   */
+  const columnsDate = [
+    initialFields.createdAt.name,
+    initialFields.modifiedAt.name,
+    initialFields.finishedAt.name,
+  ].map((field) => initialFields[field]);
 
   return (
     <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
@@ -120,27 +170,30 @@ function Add() {
       <h2 className="text-3xl font-semibold text-gray-700 dark:text-white flex justify-center mb-3">
         {getLocale("components.content.add.title")}
       </h2>
+
       <h3 className="mb-6">
         {newUserId
           ? getLocale("components.content.add.newuserid")
           : getLocale("components.content.add.userid")}
         <span className="px-3 font-bold">
-          {formData[fields.user.name].value}
+          {formData[initialFields.user.name].value}
         </span>
       </h3>
-      <form>
+
+      <form onSubmit={handleFormSubmit}>
         <input
           type="hidden"
-          value={formData[fields.user.name].value}
-          name={fields.user.name}
+          value={formData[initialFields.user.name].value}
+          name={initialFields.user.name}
         />
+
         {columnsText.map((columnText, index) => (
           <InputField
             key={index}
             name={columnText.name}
             formData={formData}
             validationErrors={validationErrors}
-            handlerChange={handlerChange}
+            handlerChange={handleInputChange}
           />
         ))}
 
@@ -150,14 +203,14 @@ function Add() {
             name={columnDate.name}
             formData={formData}
             validationErrors={validationErrors}
-            handlerChange={handlerChange}
+            handlerChange={handleInputChange}
           />
         ))}
 
         <div className="flex justify-start mt-6">
           <button
             className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-            onClick={(e) => handlerForm(e)}
+            type="submit"
           >
             {getLocale("components.content.add.addbutton")}
           </button>

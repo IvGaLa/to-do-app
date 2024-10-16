@@ -31,9 +31,20 @@ const validateField = (fieldName, formValues, rules) => {
     return replaceMessage({ message: fieldRules.maxLength.message, label, value: fieldRules.maxLength.value })
   }
 
+  // Valida si el campo es un integer. 
+  // Con isSafeInteger se comprueba que sea un entero y además esté dentro del rango mínimo y máximo que puede manejar javascript
+  if (fieldRules.integer && !Number.isSafeInteger(value)) {
+    return replaceMessage({ message: fieldRules.integer.message, label, value: fieldRules.integer.value })
+  }
+
   // Valida una expresión regular.
   if (fieldRules.pattern && !fieldRules.pattern.value.test(value)) {
     return replaceMessage({ message: fieldRules.pattern.message, label, value })
+  }
+
+  // Valida una fecha en formato YYYY-MM-DDTHH:MM
+  if (fieldRules.datetime && !fieldRules.datetime.value.test(value) && value) {
+    return replaceMessage({ message: fieldRules.datetime.message, label, value })
   }
 
   // Valida el valor mínimo
