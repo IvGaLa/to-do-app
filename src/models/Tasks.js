@@ -1,5 +1,6 @@
 import { configData } from "../config/config"
 import { dbCon } from "../config/dbConnect";
+import { sanitizeInput } from "../validations/sanitize";
 
 export class Tasks {
   constructor() {
@@ -18,7 +19,7 @@ export class Tasks {
 
   // Devuelve todas las tareas de un usuario
   async getAllByUserId(userid) {
-    const sql = `SELECT * FROM ${this.table} WHERE user=${userid};`
+    const sql = `SELECT * FROM ${this.table} WHERE user='${sanitizeInput(userid)}';`
     const response = await dbCon.execute(sql);
     return response.rows;
   }

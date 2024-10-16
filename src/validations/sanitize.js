@@ -1,6 +1,6 @@
 // Fichero para "sanitizar" los datos antes de pasar las validaciones del fomrulario y posterior envía a la BD
 
-const sanitizeInput = (input) => {
+export const sanitizeInput = (input) => {
   // Si no es un string, no se necesita sanitización adicional
   if (typeof input !== 'string') return input;
 
