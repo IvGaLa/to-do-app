@@ -3,9 +3,12 @@ import { Tasks } from "../../../models/Tasks";
 import Task from "./Task";
 import { Link } from "react-router-dom";
 import { getLocale } from "../../../locale/es";
+import TitlePage from "../../TitlePage";
 
 function List() {
   const [tasks, setTasks] = useState([]);
+
+  const userid = localStorage.getItem(getLocale("localstorage.userid"));
 
   const tasksModel = new Tasks();
 
@@ -14,15 +17,17 @@ function List() {
   }, []);
 
   const getTasks = async () => {
-    const rows = await tasksModel.getAll();
+    const rows = await tasksModel.getAllByUserId(userid);
     setTasks(rows);
   };
 
   return (
     <div>
-      <h2>{getLocale("components.content.list.title")}</h2>
+      <TitlePage>{getLocale("components.content.list.title")}</TitlePage>
       {tasks.length !== 0 ? (
-        <Task tasks={tasks} setTasks={setTasks} />
+        <div className="border border-gray-200 p-3 shadow-md">
+          <Task tasks={tasks} setTasks={setTasks} />
+        </div>
       ) : (
         <div>
           <p>{getLocale("components.content.list.withouttasks")}</p>
