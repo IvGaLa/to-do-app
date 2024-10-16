@@ -1,16 +1,25 @@
 import { localstorage } from "./localstorage";
-import { add } from "./components.content.add";
-import { list } from "./components.content.list";
+import { add } from "./components/content/add";
+import { list } from "./components/content/list";
 import { errors } from "./validations.errors";
+import { footer } from "./components/footer";
+import { header } from "./components/header";
+import { home } from "./components/home";
 
 // Guardamos todos los textos disponibles en la aplicación
 const locale = {
   generic: 'undefinied_text',
+  title: 'To-Do App',
+  // Guarda el formato de la fecha que queremos como se muestre en los listados.
+  formatdatetimetoview: 'dd/LL/yyyy HH:mm', // https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   localstorage,
   validations: {
     errors
   },
   components: {
+    home,
+    footer,
+    header,
     content: {
       add,
       list
