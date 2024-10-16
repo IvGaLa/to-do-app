@@ -10,9 +10,11 @@ const locale = {
   validations: {
     errors
   },
-  pages: {
-    add,
-    list
+  components: {
+    content: {
+      add,
+      list
+    }
   }
 }
 

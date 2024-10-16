@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { sortBy, sortType } from "../../../lib/sorting";
-import Th from "./Th";
 import { GrTrash, GrEdit, GrFormCheckmark } from "react-icons/gr";
 
+import { sortBy, sortType } from "../../../lib/sorting";
+import Th from "./Th";
 import { tasks as tasksFields } from "../../../config/tableTasks";
 import { getLocale } from "../../../locale/es";
 
@@ -24,7 +24,9 @@ function Task({ tasks, setTasks }) {
 
   return (
     <div className="overflow-x-auto">
-      <span>Tu código de usuario es: {userid}</span>
+      <span>
+        {getLocale("components.content.list.task.youruserid")} {userid}
+      </span>
       <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
         <thead>
           <tr>

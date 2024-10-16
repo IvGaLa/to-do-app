@@ -20,16 +20,16 @@ function List() {
 
   return (
     <div>
-      <h2>{getLocale("pages.list.title")}</h2>
+      <h2>{getLocale("components.content.list.title")}</h2>
       {tasks.length !== 0 ? (
         <Task tasks={tasks} setTasks={setTasks} />
       ) : (
         <div>
-          <p>{getLocale("pages.list.withouttasks")}</p>
+          <p>{getLocale("components.content.list.withouttasks")}</p>
           <p>
-            {getLocale("pages.list.click")}{" "}
-            <Link to="/add">{getLocale("pages.list.here")}</Link>{" "}
-            {getLocale("pages.list.addnewtask")}
+            {getLocale("components.content.list.click")}{" "}
+            <Link to="/add">{getLocale("components.content.list.here")}</Link>{" "}
+            {getLocale("components.content.list.addnewtask")}
           </p>
         </div>
       )}

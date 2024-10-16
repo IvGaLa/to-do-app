@@ -4,4 +4,7 @@ export const list = {
   click: 'Haz click',
   here: 'aquí',
   addnewtask: 'para añadir tu primera tarea.',
+  task: {
+    youruserid: 'Tu código de usuario es: '
+  }
 }
