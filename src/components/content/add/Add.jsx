@@ -7,6 +7,7 @@ import DateField from "./DateField";
 import { Tasks } from "../../../models/Tasks";
 import { validateForm } from "../../../validations/tasks";
 import { getLocale } from "../../../locale/es";
+import { DateTime } from "luxon";
 
 function Add() {
   //El id no lo queremos en el formulario de añadir.
@@ -49,6 +50,16 @@ function Add() {
   const handlerForm = async (e) => {
     e.preventDefault(); // Invalidamos el envío predeterminado del formulario
 
+    // Si no se ha establecido fecha de creación, le asignamos la fecha/hora actual.
+    if (formData.createdAt.value === null || formData.createdAt.value === "") {
+      const currentDateTime = DateTime.now().toFormat("yyyy-LL-dd'T'HH:mm");
+      const newFormData = {
+        ...formData,
+        createdAt: { ...formData.createdAt, value: currentDateTime },
+      };
+      setFormData(newFormData);
+    }
+
     const errors = validateForm(formData); // Validamos los datos del formulario
 
     // Si hay errors, los mostramos.
@@ -58,8 +69,14 @@ function Add() {
     }
     // Enviar datos
     const tasksModel = new Tasks();
-    const resultado = await tasksModel.add(formData);
-    setResultAdd(resultado);
+    const response = await tasksModel.add(formData);
+
+    const { lastInsertRowid } = response;
+
+    const lastInsertTask = await tasksModel.getTaskById(lastInsertRowid);
+
+    setResultAdd(lastInsertTask);
+
     resetValues(); // Reseteamos el formulario
   };
 
@@ -72,6 +89,9 @@ function Add() {
 
   // Comprobamos si el usuario tiene un userid creado en localstorage, si no lo tiene le asignamos uno nuevo.
   useEffect(() => {
+    // Nos aseguramos de borrar el formulario
+    resetValues();
+
     const userId = localStorage.getItem(getLocale("localstorage.userid"))
       ? localStorage.getItem(getLocale("localstorage.userid"))
       : getNewUserId();
@@ -91,14 +111,19 @@ function Add() {
 
   return (
     <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-      <h1>{resultAdd}</h1>
+      {resultAdd && (
+        <h1>
+          {getLocale("components.content.add.addedtask")} {resultAdd.title}
+        </h1>
+      )}
+
       <h2 className="text-3xl font-semibold text-gray-700 dark:text-white flex justify-center mb-3">
-        {getLocale("pages.add.title")}
+        {getLocale("components.content.add.title")}
       </h2>
       <h3 className="mb-6">
         {newUserId
-          ? getLocale("pages.add.newuserid")
-          : getLocale("pages.add.userid")}
+          ? getLocale("components.content.add.newuserid")
+          : getLocale("components.content.add.userid")}
         <span className="px-3 font-bold">
           {formData[fields.user.name].value}
         </span>
@@ -134,15 +159,10 @@ function Add() {
             className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
             onClick={(e) => handlerForm(e)}
           >
-            {getLocale("pages.add.addbutton")}
+            {getLocale("components.content.add.addbutton")}
           </button>
         </div>
       </form>
-      {/* {Object.entries(formData).map(([key, field], index) => (
-        <p key={index}>
-          {key}: {field.value}
-        </p>
-      ))} */}
     </section>
   );
 }
