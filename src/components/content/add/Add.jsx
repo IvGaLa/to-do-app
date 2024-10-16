@@ -8,6 +8,7 @@ import { Tasks } from "../../../models/Tasks";
 import { validateForm } from "../../../validations/tasks";
 import { getLocale } from "../../../locale/es";
 import { DateTime } from "luxon";
+import TitlePage from "../../TitlePage";
 
 function Add() {
   /**
@@ -160,63 +161,62 @@ function Add() {
   ].map((field) => initialFields[field]);
 
   return (
-    <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-      {resultAdd && (
-        <h1>
-          {getLocale("components.content.add.addedtask")} {resultAdd.title}
-        </h1>
-      )}
+    <div>
+      <TitlePage>{getLocale("components.content.add.title")}</TitlePage>
+      <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+        {resultAdd && (
+          <h3>
+            {getLocale("components.content.add.addedtask")} {resultAdd.title}
+          </h3>
+        )}
 
-      <h2 className="text-3xl font-semibold text-gray-700 dark:text-white flex justify-center mb-3">
-        {getLocale("components.content.add.title")}
-      </h2>
+        <h3 className="mb-6">
+          {newUserId
+            ? getLocale("components.content.add.newuserid")
+            : getLocale("components.content.add.userid")}
+          <span className="px-3 font-bold">
+            {formData[initialFields.user.name].value}
+          </span>
+        </h3>
 
-      <h3 className="mb-6">
-        {newUserId
-          ? getLocale("components.content.add.newuserid")
-          : getLocale("components.content.add.userid")}
-        <span className="px-3 font-bold">
-          {formData[initialFields.user.name].value}
-        </span>
-      </h3>
-
-      <form onSubmit={handleFormSubmit}>
-        <input
-          type="hidden"
-          value={formData[initialFields.user.name].value}
-          name={initialFields.user.name}
-        />
-
-        {columnsText.map((columnText, index) => (
-          <InputField
-            key={index}
-            name={columnText.name}
-            formData={formData}
-            validationErrors={validationErrors}
-            handlerChange={handleInputChange}
+        <form onSubmit={handleFormSubmit}>
+          <input
+            type="hidden"
+            value={formData[initialFields.user.name].value}
+            name={initialFields.user.name}
           />
-        ))}
 
-        {columnsDate.map((columnDate, index) => (
-          <DateField
-            key={index}
-            name={columnDate.name}
-            formData={formData}
-            validationErrors={validationErrors}
-            handlerChange={handleInputChange}
-          />
-        ))}
+          {columnsText.map((columnText, index) => (
+            <InputField
+              key={index}
+              name={columnText.name}
+              formData={formData}
+              validationErrors={validationErrors}
+              handlerChange={handleInputChange}
+            />
+          ))}
 
-        <div className="flex justify-start mt-6">
-          <button
-            className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-            type="submit"
-          >
-            {getLocale("components.content.add.addbutton")}
-          </button>
-        </div>
-      </form>
-    </section>
+          {columnsDate.map((columnDate, index) => (
+            <DateField
+              key={index}
+              name={columnDate.name}
+              formData={formData}
+              validationErrors={validationErrors}
+              handlerChange={handleInputChange}
+            />
+          ))}
+
+          <div className="flex justify-start mt-6">
+            <button
+              className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+              type="submit"
+            >
+              {getLocale("components.content.add.addbutton")}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
   );
 }
 
