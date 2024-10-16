@@ -16,28 +16,39 @@ const validateField = (fieldName, formValues, rules) => {
   const { value, label } = formValues[fieldName]
   const fieldRules = rules[fieldName];
 
+  // Valida si el campo existe
   if (fieldRules.required && !value) {
     return replaceMessage({ message: fieldRules.required.message, label, value })
   }
 
+  // Valida la longitud mínima del texto
   if (fieldRules.minLength && value.length < fieldRules.minLength.value) {
     return replaceMessage({ message: fieldRules.minLength.message, label, value: fieldRules.minLength.value })
   }
 
+  // Valida la longitud máxima del texto
   if (fieldRules.maxLength && value.length > fieldRules.maxLength.value) {
     return replaceMessage({ message: fieldRules.maxLength.message, label, value: fieldRules.maxLength.value })
   }
 
+  // Valida una expresión regular.
   if (fieldRules.pattern && !fieldRules.pattern.value.test(value)) {
     return replaceMessage({ message: fieldRules.pattern.message, label, value })
   }
 
+  // Valida el valor mínimo
   if (fieldRules.min && value < fieldRules.min.value) {
     return replaceMessage({ message: fieldRules.min.message, label, value: fieldRules.min.value })
   }
 
+  // Valida el valor máximo
   if (fieldRules.max && value > fieldRules.max.value) {
     return replaceMessage({ message: fieldRules.max.message, label, value: fieldRules.max.value })
+  }
+
+  // Valida si el valor es bool (true/false o 0/1)
+  if (fieldRules.bool && !fieldRules.bool.value.includes(value)) {
+    return replaceMessage({ message: fieldRules.bool.message, label })
   }
 
   return null; // Si no hay errores, devuelve null
