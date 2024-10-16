@@ -1,3 +1,5 @@
+import ErrorMessage from "./ErrorMessage";
+
 function InputField({ formData, handlerChange, name, validationErrors }) {
   return (
     <div>
@@ -11,7 +13,7 @@ function InputField({ formData, handlerChange, name, validationErrors }) {
         value={formData[name].value || ""} // Asegura que siempre tenga un valor, por defecto vacío
         onChange={(e) => handlerChange(e)}
       />
-      {validationErrors[name] && <span>{validationErrors[name]}</span>}
+      <ErrorMessage error={validationErrors[name]} />
     </div>
   );
 }
