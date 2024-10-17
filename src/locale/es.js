@@ -5,6 +5,8 @@ import { errors } from "./validations.errors";
 import { footer } from "./components/footer";
 import { header } from "./components/header";
 import { home } from "./components/home";
+import { modify } from "./components/content/modify";
+import { _delete } from "./components/content/delete";
 
 // Guardamos todos los textos disponibles en la aplicación
 const locale = {
@@ -22,7 +24,9 @@ const locale = {
     header,
     content: {
       add,
-      list
+      list,
+      modify,
+      delete: _delete
     }
   }
 }
