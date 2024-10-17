@@ -27,7 +27,7 @@ export class Tasks {
 
   // Devuelve una tarea según su id
   async getTaskById(id) {
-    const sql = `SELECT * FROM ${this.table} WHERE id=${id};`
+    const sql = `SELECT * FROM ${this.table} WHERE id=${parseInt(id)};`
     const response = await dbCon.execute(sql);
     // Devuelve directamente la tarea
     return response.rows[0];
