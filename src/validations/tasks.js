@@ -33,7 +33,7 @@ const validateField = (fieldName, formValues, rules) => {
 
   // Valida si el campo es un integer. 
   // Con isSafeInteger se comprueba que sea un entero y además esté dentro del rango mínimo y máximo que puede manejar javascript
-  if (fieldRules.integer && !Number.isSafeInteger(value)) {
+  if (fieldRules.integer && !/^\d+$/.test(value)) {
     return replaceMessage({ message: fieldRules.integer.message, label, value: fieldRules.integer.value })
   }
 
