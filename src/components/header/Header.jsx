@@ -1,7 +1,11 @@
+import { configData } from "../../config/config";
 import { getLocale } from "../../locale/es";
 import LinkHeader from "./LinkHeader";
 
 function Header() {
+  const { routes } = configData;
+  const routesMap = [routes.home, routes.add, routes.list];
+
   return (
     <header className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -11,21 +15,13 @@ function Header() {
         </div>
         <div className="flex justify-center">
           <ul className="sm:flex hidden items-center gap-4">
-            <li>
-              <LinkHeader to="/">
-                {getLocale("components.header.links.home")}
-              </LinkHeader>
-            </li>
-            <li>
-              <LinkHeader to="/add">
-                {getLocale("components.header.links.add")}
-              </LinkHeader>
-            </li>
-            <li>
-              <LinkHeader to="/list">
-                {getLocale("components.header.links.list")}
-              </LinkHeader>
-            </li>
+            {routesMap.map((route) => (
+              <li key={route.name}>
+                <LinkHeader to={route.path}>
+                  {getLocale(`components.header.links.${route.name}`)}
+                </LinkHeader>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
