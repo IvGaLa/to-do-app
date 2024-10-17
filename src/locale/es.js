@@ -7,6 +7,7 @@ import { header } from "./components/header";
 import { home } from "./components/home";
 import { modify } from "./components/content/modify";
 import { _delete } from "./components/content/delete";
+import { tasks } from "./components/models/tasks";
 
 // Guardamos todos los textos disponibles en la aplicación
 const locale = {
@@ -17,6 +18,9 @@ const locale = {
   localstorage,
   validations: {
     errors
+  },
+  models: {
+    tasks
   },
   components: {
     home,
