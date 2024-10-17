@@ -61,4 +61,13 @@ export class Tasks {
     // Devolvemos el objeto response completo ya que en el insert no hay rows como tal.
     return response;
   }
+
+
+
+  // Elimina una tarea por el id
+  async deleteById(id) {
+    const sql = `DELETE FROM ${this.table} WHERE id=${id};`
+    const response = await dbCon.execute(sql)
+    return response;
+  }
 }
