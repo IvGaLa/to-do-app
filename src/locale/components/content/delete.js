@@ -5,4 +5,5 @@ export const _delete = {
   cancel: 'Cancelar',
   confirm: 'Confirmar eliminación',
   tasknotfound: 'No se ha encontrado la tarea',
+  cantdelete: 'No ha sido posible eliminar la tarea'
 }
