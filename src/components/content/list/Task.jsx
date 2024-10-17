@@ -6,6 +6,7 @@ import Th from "./Th";
 import { tasks as tasksFields } from "../../../config/tableTasks";
 import { getLocale } from "../../../locale/es";
 import TdDate from "./TdDate";
+import IconLink from "./IconLink";
 
 function Task({ tasks, setTasks }) {
   const handlerSorting = (orderBy) => {
@@ -62,8 +63,12 @@ function Task({ tasks, setTasks }) {
               <TdDate date={task.finishedAt} />
               <td>
                 <div className="flex justify-between">
-                  <GrEdit />
-                  <GrTrash />
+                  <IconLink to={`/modify/${task.id}`}>
+                    <GrEdit />
+                  </IconLink>
+                  <IconLink to={`/delete/${task.id}`}>
+                    <GrTrash />
+                  </IconLink>
                   <GrFormCheckmark />
                 </div>
               </td>
