@@ -1,3 +1,4 @@
+import { getLocale } from "../locale/es"
 import { tableNames } from "./tableNames"
 import { validationTypes } from "./validationsTypes"
 
@@ -10,7 +11,7 @@ export const tasks = {
     id: {
       name: 'id',
       type: 'integer',
-      label: 'Id',
+      label: getLocale('models.tasks.label.id'),
       value: '',
       validation: {
         required,
@@ -20,7 +21,7 @@ export const tasks = {
     user: {
       name: 'user',
       type: 'text',
-      label: 'Usuario',
+      label: getLocale('models.tasks.label.user'),
       value: '',
       validation: {
         required,
@@ -29,7 +30,7 @@ export const tasks = {
     title: {
       name: 'title',
       type: 'text',
-      label: 'Título',
+      label: getLocale('models.tasks.label.title'),
       value: '',
       validation: {
         required,
@@ -39,7 +40,7 @@ export const tasks = {
     description: {
       name: 'description',
       type: 'text',
-      label: 'Descripción',
+      label: getLocale('models.tasks.label.description'),
       value: '',
       validation: {
         required,
@@ -49,7 +50,7 @@ export const tasks = {
     finished: {
       name: 'finished',
       type: 'integer',
-      label: 'Completada',
+      label: getLocale('models.tasks.label.finished'),
       value: 0,
       validation: {
         bool,
@@ -58,7 +59,7 @@ export const tasks = {
     createdAt: {
       name: 'createdAt',
       type: 'text',
-      label: 'Creada',
+      label: getLocale('models.tasks.label.createdAt'),
       value: '',
       validation: {
         datetime,
@@ -67,7 +68,7 @@ export const tasks = {
     modifiedAt: {
       name: 'modifiedAt',
       type: 'text',
-      label: 'Modificada',
+      label: getLocale('models.tasks.label.modifiedAt'),
       value: '',
       validation: {
         datetime,
@@ -76,7 +77,7 @@ export const tasks = {
     finishedAt: {
       name: 'finishedAt',
       type: 'text',
-      label: 'Finalizada',
+      label: getLocale('models.tasks.label.finishedAt'),
       value: '',
       validation: {
         datetime,
