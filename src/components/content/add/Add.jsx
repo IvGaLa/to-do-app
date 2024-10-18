@@ -108,17 +108,14 @@ function Add() {
       return;
     }
 
-    // Instanciamos el modelo de la tabla tasks
-    const tasksModel = new Tasks();
-
     // Añadimos la tarea a la base de datos.
-    const response = await tasksModel.add(formData);
+    const response = await Tasks.add(formData);
 
     // Recuperamos el id asignado (Lo devuelve la consulta)
     const { lastInsertRowid } = response;
 
     // Recuperamos la tarea añadida
-    const lastInsertTask = await tasksModel.getTaskById(lastInsertRowid);
+    const lastInsertTask = await Tasks.getTaskById(lastInsertRowid);
 
     // Guardamos para mostrar la tarea añadida
     setResultAdd(lastInsertTask);

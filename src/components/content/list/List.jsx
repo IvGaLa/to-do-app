@@ -4,20 +4,21 @@ import Task from "./Task";
 import { Link } from "react-router-dom";
 import { getLocale } from "../../../locale/es";
 import TitlePage from "../../TitlePage";
+import { configData } from "../../../config/config";
 
 function List() {
   const [tasks, setTasks] = useState([]);
 
   const userid = localStorage.getItem(getLocale("localstorage.userid"));
 
-  const tasksModel = new Tasks();
+  const { routes } = configData;
 
   useEffect(() => {
     getTasks();
   }, []);
 
   const getTasks = async () => {
-    const rows = await tasksModel.getAllByUserId(userid);
+    const rows = await Tasks.getAllByUserId(userid);
     setTasks(rows);
   };
 
@@ -33,7 +34,9 @@ function List() {
           <p>{getLocale("components.content.list.withouttasks")}</p>
           <p>
             {getLocale("components.content.list.click")}{" "}
-            <Link to="/add">{getLocale("components.content.list.here")}</Link>{" "}
+            <Link to={routes.add.path}>
+              {getLocale("components.content.list.here")}
+            </Link>{" "}
             {getLocale("components.content.list.addnewtask")}
           </p>
         </div>

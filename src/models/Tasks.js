@@ -3,14 +3,14 @@ import { dbCon } from "../config/dbConnect";
 import { sanitizeInput } from "../validations/sanitize";
 
 export class Tasks {
-  constructor() {
-    this.table = configData.tables.tasks.name
-    this.fields = configData.tables.tasks.fields
-  }
+
+  static table = configData.tables.tasks.name
+
+  static fields = configData.tables.tasks.fields
 
 
   // Devuelve todas las tareas
-  async getAll() {
+  static async getAll() {
     const sql = `SELECT * FROM ${this.table}`
     const response = await dbCon.execute(sql);
     return response.rows;
@@ -18,7 +18,7 @@ export class Tasks {
 
 
   // Devuelve todas las tareas de un usuario
-  async getAllByUserId(userid) {
+  static async getAllByUserId(userid) {
     const sql = `SELECT * FROM ${this.table} WHERE user='${sanitizeInput(userid)}';`
     const response = await dbCon.execute(sql);
     return response.rows;
@@ -26,7 +26,7 @@ export class Tasks {
 
 
   // Devuelve una tarea según su id
-  async getTaskById(id) {
+  static async getTaskById(id) {
     const sql = `SELECT * FROM ${this.table} WHERE id=${parseInt(id)};`
     const response = await dbCon.execute(sql);
     // Devuelve directamente la tarea
@@ -35,7 +35,7 @@ export class Tasks {
 
 
   // Añade una tarea
-  async add(data) {
+  static async add(data) {
     // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
     const fieldsToAdd = Object.values(data)
       .filter(field => field.value !== '' && field.value !== null && this.fields[field.name])
@@ -65,7 +65,7 @@ export class Tasks {
 
 
   // Elimina una tarea por el id
-  async deleteById(id) {
+  static async deleteById(id) {
     const sql = `DELETE FROM ${this.table} WHERE id=${id};`
     const response = await dbCon.execute(sql)
     return response;

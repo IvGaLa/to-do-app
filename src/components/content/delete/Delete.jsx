@@ -10,7 +10,6 @@ import ConfirmDelete from "./ConfirmDelete";
 
 function Delete() {
   const { id } = useParams();
-  const task = new Tasks();
 
   // Solo mantenemos la clave 'id' con su estructura y modificamos 'value'
   const idToDelete = {
@@ -33,7 +32,7 @@ function Delete() {
     // Si hay errores, salimos... terminará mostrando que no se ha encontrado el registro.
     if (Object.keys(errors).length > 0) return;
 
-    const taskDelete = await task.getTaskById(
+    const taskDelete = await Tasks.getTaskById(
       idToDelete[idToDelete.id.name].value
     );
 

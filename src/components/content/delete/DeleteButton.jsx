@@ -4,12 +4,11 @@ import { configData } from "../../../config/config";
 
 const DeleteButton = ({ id, children }) => {
   const routeList = configData.routes.list.path;
-  const routeCantDelete = configData.routes.cantdelete.path;
+  const routeCantDelete = configData.routes.deleteerror.path;
   const navigate = useNavigate();
 
   const onDelete = async () => {
-    const task = new Tasks();
-    const deleted = await task.deleteById(id);
+    const deleted = await Tasks.deleteById(id);
 
     // Error al eliminar
     if (deleted.rowsAffected !== 1) return navigate(routeCantDelete);

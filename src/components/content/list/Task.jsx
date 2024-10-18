@@ -7,8 +7,11 @@ import { tasks as tasksFields } from "../../../config/tableTasks";
 import { getLocale } from "../../../locale/es";
 import TdDate from "./TdDate";
 import IconLink from "./IconLink";
+import { configData } from "../../../config/config";
 
 function Task({ tasks, setTasks }) {
+  const { routes } = configData;
+
   const handlerSorting = (orderBy) => {
     setTasks(sortBy({ tasks, orderBy, sortOrder, setSortOrder }));
   };
@@ -63,10 +66,10 @@ function Task({ tasks, setTasks }) {
               <TdDate date={task.finishedAt} />
               <td>
                 <div className="flex justify-between">
-                  <IconLink to={`/modify/${task.id}`}>
+                  <IconLink to={`/${routes.modify.name}/${task.id}`}>
                     <GrEdit />
                   </IconLink>
-                  <IconLink to={`/delete/${task.id}`}>
+                  <IconLink to={`/${routes.delete.name}/${task.id}`}>
                     <GrTrash />
                   </IconLink>
                   <GrFormCheckmark />
