@@ -15,6 +15,7 @@ const locale = {
   title: 'To-Do App',
   // Guarda el formato de la fecha que queremos como se muestre en los listados.
   formatdatetimetoview: 'dd/LL/yyyy HH:mm', // https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+  formatdatetimetodb: "yyyy-LL-dd'T'HH:mm", // https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   localstorage,
   validations: {
     errors
