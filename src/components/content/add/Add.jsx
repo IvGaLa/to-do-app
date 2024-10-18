@@ -76,7 +76,7 @@ function Add() {
 
     // Vaciamos los errores que puedan haber.
     setValidationErrors({});
-  }, [formData]);
+  }, []);
 
   /**
    *
@@ -132,7 +132,7 @@ function Add() {
   useEffect(() => {
     // Reseteamos el formulario
     resetValues();
-  }, []);
+  }, [resetValues]);
 
   /**
    *
