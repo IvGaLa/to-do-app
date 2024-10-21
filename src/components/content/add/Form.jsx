@@ -1,13 +1,14 @@
 import { useEffect, useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-import { tasks } from "../../../config/tableTasks";
-import { Tasks } from "../../../models/Tasks";
-import { validateForm } from "../../../validations/tasks";
-import { getLocale } from "../../../locale/es";
 import { DateTime } from "luxon";
-import DateField from "./DateField";
-import InputField from "./InputField";
+
+import { tasks } from "@config/tableTasks";
+import { Tasks } from "@models/Tasks";
+import { validateForm } from "@validations/tasks";
+import { getLocale } from "@locales/es";
+
+import DateField from "@components/content/add/DateField";
+import InputField from "@components/content/add/InputField";
 
 function Form({ setResultAdd }) {
   /**

@@ -1,4 +1,5 @@
-import { getLocale } from "../locale/es"
+import { getLocale } from "@locales/es"
+
 import { tableNames } from "./tableNames"
 import { validationTypes } from "./validationsTypes"
 

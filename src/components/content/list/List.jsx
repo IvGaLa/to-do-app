@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Tasks } from "../../../models/Tasks";
-import Task from "./Task";
 import { Link } from "react-router-dom";
-import { getLocale } from "../../../locale/es";
-import TitlePage from "../../TitlePage";
-import { configData } from "../../../config/config";
+
+import { Tasks } from "@models/Tasks";
+import { getLocale } from "@locales/es";
+import TitlePage from "@components/TitlePage";
+import { configData } from "@config/config";
+
+import Task from "@components/content/list/Task";
 
 function List() {
   const [tasks, setTasks] = useState([]);

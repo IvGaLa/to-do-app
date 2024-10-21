@@ -1,4 +1,4 @@
-import { getLocale } from "../../../locale/es";
+import { getLocale } from "@locales/es";
 
 function CantDelete() {
   return <div>{getLocale("components.content.delete.cantdelete")}</div>;

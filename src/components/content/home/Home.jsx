@@ -1,5 +1,5 @@
-import { getLocale } from "../../../locale/es";
-import TitlePage from "../../TitlePage";
+import { getLocale } from "@locales/es";
+import TitlePage from "@components/TitlePage";
 
 function Home() {
   return <TitlePage>{getLocale("components.home.title")}</TitlePage>;

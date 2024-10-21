@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import TitlePage from "../../TitlePage";
-import { getLocale } from "../../../locale/es";
-import { Tasks } from "../../../models/Tasks";
-import { tasks } from "../../../config/tableTasks";
-import { validateForm } from "../../../validations/tasks";
-import ConfirmDelete from "./ConfirmDelete";
+import TitlePage from "@components/TitlePage";
+import { getLocale } from "@locales/es";
+import { Tasks } from "@models/Tasks";
+import { tasks } from "@config/tableTasks";
+import { validateForm } from "@validations/tasks";
+
+import ConfirmDelete from "@components/content/delete/ConfirmDelete";
 
 function Delete() {
   const { id } = useParams();

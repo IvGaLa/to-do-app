@@ -1,4 +1,4 @@
-import { ToDoApp } from "./ToDoApp";
+import { ToDoApp } from "@models/ToDoApp";
 
 export class Tasks {
 

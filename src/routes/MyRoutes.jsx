@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../components/content/home/Home";
-import List from "../components/content/list/List";
-import Add from "../components/content/add/Add";
-import Delete from "../components/content/delete/Delete";
-import Modify from "../components/content/modify/Modify";
-import CantDelete from "../components/content/delete/CantDelete";
-import { configData } from "../config/config";
+
+import Home from "@components/content/home/Home";
+import List from "@components/content/list/List";
+import Add from "@components/content/add/Add";
+import Delete from "@components/content/delete/Delete";
+import Modify from "@components/content/modify/Modify";
+import CantDelete from "@components/content/delete/CantDelete";
+import { configData } from "@config/config";
 
 function MyRoutes() {
   const { routes } = configData;

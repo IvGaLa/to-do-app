@@ -1,6 +1,7 @@
-import { configData } from "../../config/config";
-import { getLocale } from "../../locale/es";
-import LinkHeader from "./LinkHeader";
+import { configData } from "@config/config";
+import { getLocale } from "@locales/es";
+
+import LinkHeader from "@components/header/LinkHeader";
 
 function Header() {
   const { routes } = configData;

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { Tasks } from "../../../models/Tasks";
-import { configData } from "../../../config/config";
+
+import { Tasks } from "@models/Tasks";
+import { configData } from "@config/config";
 
 const DeleteButton = ({ id, children }) => {
   const routeList = configData.routes.list.path;

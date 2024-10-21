@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { getLocale } from "../../../locale/es";
-import TitlePage from "../../TitlePage";
-import Added from "./Added";
-import Form from "./Form";
+
+import { getLocale } from "@locales/es";
+import TitlePage from "@components/TitlePage";
+
+import Added from "@components/content/add/Added";
+import Form from "@components/content/add/Form";
 
 function Add() {
   /**

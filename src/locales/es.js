@@ -1,13 +1,13 @@
-import { localstorage } from "./localstorage";
-import { add } from "./components/content/add";
-import { list } from "./components/content/list";
-import { errors } from "./validations.errors";
-import { footer } from "./components/footer";
-import { header } from "./components/header";
-import { home } from "./components/home";
-import { modify } from "./components/content/modify";
-import { _delete } from "./components/content/delete";
-import { tasks } from "./components/models/tasks";
+import { localstorage } from "@locales/localstorage";
+import { add } from "@locales/components/content/add";
+import { list } from "@locales/components/content/list";
+import { errors } from "@locales/validations.errors";
+import { footer } from "@locales/components/footer";
+import { header } from "@locales/components/header";
+import { home } from "@locales/components/home";
+import { modify } from "@locales/components/content/modify";
+import { _delete } from "@locales/components/content/delete";
+import { tasks } from "@locales/components/models/tasks";
 
 // Guardamos todos los textos disponibles en la aplicación
 const locale = {

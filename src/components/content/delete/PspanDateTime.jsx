@@ -1,6 +1,7 @@
-import { formatDataTime } from "../../../lib/datetime";
-import { getLocale } from "../../../locale/es";
-import Pspan from "./Pspan";
+import { formatDataTime } from "@lib/datetime";
+import { getLocale } from "@locales/es";
+
+import Pspan from "@components/content/delete/Pspan";
 
 function PspanDateTime({ name, value }) {
   return (

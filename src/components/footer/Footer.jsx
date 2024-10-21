@@ -1,4 +1,4 @@
-import { getLocale } from "../../locale/es";
+import { getLocale } from "@locales/es";
 
 function Footer() {
   return (

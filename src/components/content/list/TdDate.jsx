@@ -1,5 +1,5 @@
-import { getLocale } from "../../../locale/es";
-import { formatDataTime } from "../../../lib/datetime";
+import { getLocale } from "@locales/es";
+import { formatDataTime } from "@lib/datetime";
 
 function TdDate({ date }) {
   return (

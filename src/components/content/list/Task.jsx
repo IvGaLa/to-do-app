@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { GrTrash, GrEdit, GrFormCheckmark } from "react-icons/gr";
 
-import { sortBy, sortType } from "../../../lib/sorting";
-import Th from "./Th";
-import { tasks as tasksFields } from "../../../config/tableTasks";
-import { getLocale } from "../../../locale/es";
-import TdDate from "./TdDate";
-import IconLink from "./IconLink";
-import { configData } from "../../../config/config";
+import { sortBy, sortType } from "@lib/sorting";
+import { tasks as tasksFields } from "@config/tableTasks";
+import { getLocale } from "@locales/es";
+import { configData } from "@config/config";
+
+import TdDate from "@components/content/list/TdDate";
+import IconLink from "@components/content/list/IconLink";
+import Th from "@components/content/list/Th";
 
 function Task({ tasks, setTasks }) {
   const { routes } = configData;

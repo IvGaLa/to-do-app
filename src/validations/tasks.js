@@ -1,6 +1,6 @@
-import { tasks } from "../config/tableTasks";
-import { getValidations } from "../lib/validations";
-import { sanitizeFormData } from "./sanitize";
+import { tasks } from "@config/tableTasks";
+import { getValidations } from "@lib/validations";
+import { sanitizeFormData } from "@validations/sanitize";
 
 const validationsTasks = getValidations(tasks.fields)
 

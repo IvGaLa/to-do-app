@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { getLocale } from "../../../locale/es";
-import { configData } from "../../../config/config";
+
+import { getLocale } from "@locales/es";
+import { configData } from "@config/config";
 
 function Added({ resultAdd, setResultAdd }) {
   const routeAdd = configData.routes.add;

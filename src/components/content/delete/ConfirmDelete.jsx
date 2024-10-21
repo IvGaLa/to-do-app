@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 
-import { getLocale } from "../../../locale/es";
-import Pspan from "./Pspan";
-import PspanDateTime from "./PspanDateTime";
-import DeleteButton from "./DeleteButton";
-import { configData } from "../../../config/config";
+import { configData } from "@config/config";
+import { getLocale } from "@locales/es";
+
+import Pspan from "@components/content/delete/Pspan";
+import PspanDateTime from "@components/content/delete/PspanDateTime";
+import DeleteButton from "@components/content/delete/DeleteButton";
 
 const ConfirmDelete = ({ task }) => {
   const routeList = configData.routes.list.path;

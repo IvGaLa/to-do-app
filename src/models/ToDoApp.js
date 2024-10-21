@@ -1,6 +1,6 @@
-import { configData } from "../config/config";
-import { dbCon } from "../config/dbConnect";
-import { sanitizeInput } from "../validations/sanitize";
+import { configData } from "@config/config";
+import { dbCon } from "@config/dbConnect";
+import { sanitizeInput } from "@validations/sanitize";
 
 class ToDoApp {
   tablename = ''

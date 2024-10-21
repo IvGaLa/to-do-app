@@ -1,4 +1,5 @@
-import { getLocale } from "../locale/es"
+import { getLocale } from "@locales/es"
+
 export const validationTypes = {
   required: {
     value: true,
