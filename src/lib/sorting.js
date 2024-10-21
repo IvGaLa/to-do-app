@@ -1,5 +1,7 @@
 import { DateTime } from "luxon";
 
+import { getLocale } from "@locales/es";
+
 const sortByText = {
   sorting: (props) => {
     const { tasks, orderBy, sortOrder, setSortOrder } = props
@@ -22,19 +24,21 @@ const sortByDate = {
     const newOrder = { ...sortOrder }
     newOrder[orderBy] = sortOrder[orderBy] === 1 ? 0 : 1
     setSortOrder(newOrder)
+
+    const dateFormat = getLocale('formatdatetimetodb')
+
     const newTasks = [...tasks].sort((a, b) => {
       if (newOrder[orderBy] === 1) {
         if (a[orderBy] === null) return 1; // Si la fecha de "a" es null salimos
         if (b[orderBy] === null) return -1; // Si la fecha de "b" es null salimos
-
         // Formateamos la fecha y la convertimos a milisegundos con `toMillis()` para la comparación.
-        return DateTime.fromFormat(a[orderBy], "dd/MM/yyyy HH:mm").toMillis() - DateTime.fromFormat(b[orderBy], "dd/MM/yyyy HH:mm").toMillis()
+        return DateTime.fromFormat(a[orderBy], dateFormat).toMillis() - DateTime.fromFormat(b[orderBy], dateFormat).toMillis()
       } else {
         if (a[orderBy] === null) return -1; // Si la fecha de "a" es null salimos
         if (b[orderBy] === null) return 1; // Si la fecha de "b" es null salimos
 
         // Formateamos la fecha y la convertimos a milisegundos con `toMillis()` para la comparación.
-        return DateTime.fromFormat(b[orderBy], "dd/MM/yyyy HH:mm").toMillis() - DateTime.fromFormat(a[orderBy], "dd/MM/yyyy HH:mm").toMillis()
+        return DateTime.fromFormat(b[orderBy], dateFormat).toMillis() - DateTime.fromFormat(a[orderBy], dateFormat).toMillis()
       }
 
     });
@@ -62,9 +66,6 @@ export const sortType = {
 }
 
 export const sortBy = (props) => {
-  const { orderBy } = props
-  const toSort = sortFunctions[orderBy];
+  const toSort = sortFunctions[props.orderBy];
   return toSort.sorting(props);
 };
-
-
