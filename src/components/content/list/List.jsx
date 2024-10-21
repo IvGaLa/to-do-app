@@ -6,7 +6,7 @@ import { getLocale } from "@locales/es";
 import TitlePage from "@components/TitlePage";
 import { configData } from "@config/config";
 
-import Task from "@components/content/list/Task";
+import TaskCard from "@components/content/list/TaskCard";
 
 function List() {
   const [tasks, setTasks] = useState([]);
@@ -28,9 +28,7 @@ function List() {
     <div>
       <TitlePage>{getLocale("components.content.list.title")}</TitlePage>
       {tasks.length !== 0 ? (
-        <div className="border border-gray-200 p-3 shadow-md">
-          <Task tasks={tasks} setTasks={setTasks} />
-        </div>
+        <TaskCard tasks={tasks} setTasks={setTasks} />
       ) : (
         <div>
           <p>{getLocale("components.content.list.withouttasks")}</p>

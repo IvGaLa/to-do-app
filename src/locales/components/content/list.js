@@ -6,5 +6,7 @@ export const list = {
   addnewtask: 'para añadir tu primera tarea.',
   task: {
     youruserid: 'Tu código de usuario es: '
-  }
+  },
+  pending: 'Pendiente',
+  completed: 'Completada',
 }
