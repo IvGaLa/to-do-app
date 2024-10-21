@@ -4,8 +4,10 @@ import { getLocale } from "../../../locale/es";
 import Pspan from "./Pspan";
 import PspanDateTime from "./PspanDateTime";
 import DeleteButton from "./DeleteButton";
+import { configData } from "../../../config/config";
 
 const ConfirmDelete = ({ task }) => {
+  const routeList = configData.routes.list.path;
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full">
@@ -21,7 +23,7 @@ const ConfirmDelete = ({ task }) => {
 
         <div className="mt-6 flex justify-between">
           <Link
-            to="/list"
+            to={routeList}
             className="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white font-semibold rounded-md"
           >
             {getLocale("components.content.delete.cancel")}
