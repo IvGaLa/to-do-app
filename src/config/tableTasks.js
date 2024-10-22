@@ -1,7 +1,7 @@
 import { getLocale } from "@locales/es"
 
-import { tableNames } from "./tableNames"
-import { validationTypes } from "./validationsTypes"
+import { tableNames } from "@config/tableNames"
+import { validationTypes } from "@config/validationsTypes"
 
 const { required, integer, bool, datetime, maxLength } = validationTypes
 

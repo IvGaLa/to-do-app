@@ -1,5 +1,5 @@
 import { createClient } from "@libsql/client";
-import { configData } from "./config";
+import { configData } from "@config/config";
 
 const { url, authToken } = configData
 

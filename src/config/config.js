@@ -1,6 +1,6 @@
-import { tasks } from "./tableTasks";
-import { tableNames } from "./tableNames";
-import { routes } from "./routes";
+import { tasks } from "@config/tableTasks";
+import { tableNames } from "@config/tableNames";
+import { routes } from "@config/routes";
 
 const { VITE_TURSO_AUTH_TOKEN: authToken, VITE_TURSO_DATABASE_URL: url } =
   import.meta.env;
