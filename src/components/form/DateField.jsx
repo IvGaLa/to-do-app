@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import ErrorMessage from "@components/content/add/ErrorMessage";
+import ErrorMessage from "@components/form/ErrorMessage";
 
 function DateField({ name, handlerChange, formData, validationErrors }) {
   const [dateAt, setDateAt] = useState(formData[name].value);

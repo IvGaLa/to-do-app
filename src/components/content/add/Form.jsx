@@ -6,9 +6,7 @@ import { tasks } from "@config/tableTasks";
 import { Tasks } from "@models/Tasks";
 import { validateForm } from "@validations/tasks";
 import { getLocale } from "@locales/es";
-
-import DateField from "@components/content/add/DateField";
-import InputField from "@components/content/add/InputField";
+import FormTask from "@components/form/FormTask";
 
 function Form({ setResultAdd }) {
   /**
@@ -142,9 +140,9 @@ function Form({ setResultAdd }) {
    *
    */
   const columnsText = [
-    initialFields.title.name,
-    initialFields.description.name,
-  ].map((field) => initialFields[field]);
+    initialFields[initialFields.title.name],
+    initialFields[initialFields.description.name],
+  ];
 
   /**
    *
@@ -153,13 +151,24 @@ function Form({ setResultAdd }) {
    *
    */
   const columnsDate = [
-    initialFields.createdAt.name,
-    initialFields.modifiedAt.name,
-    initialFields.finishedAt.name,
-  ].map((field) => initialFields[field]);
+    initialFields[initialFields.createdAt.name],
+    initialFields[initialFields.modifiedAt.name],
+    initialFields[initialFields.finishedAt.name],
+  ];
+
+  const formProps = {
+    handleFormSubmit,
+    formData,
+    initialFields,
+    columnsText,
+    columnsDate,
+    validationErrors,
+    handleInputChange,
+    buttonText: getLocale("components.content.add.addbutton"),
+  };
 
   return (
-    <>
+    <div>
       <h3 className="mb-6">
         {newUserId
           ? getLocale("components.content.add.newuserid")
@@ -169,43 +178,8 @@ function Form({ setResultAdd }) {
         </span>
       </h3>
 
-      <form onSubmit={handleFormSubmit}>
-        <input
-          type="hidden"
-          value={formData[initialFields.user.name].value}
-          name={initialFields.user.name}
-        />
-
-        {columnsText.map((columnText, index) => (
-          <InputField
-            key={index}
-            name={columnText.name}
-            formData={formData}
-            validationErrors={validationErrors}
-            handlerChange={handleInputChange}
-          />
-        ))}
-
-        {columnsDate.map((columnDate, index) => (
-          <DateField
-            key={index}
-            name={columnDate.name}
-            formData={formData}
-            validationErrors={validationErrors}
-            handlerChange={handleInputChange}
-          />
-        ))}
-
-        <div className="flex justify-start mt-6">
-          <button
-            className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-            type="submit"
-          >
-            {getLocale("components.content.add.addbutton")}
-          </button>
-        </div>
-      </form>
-    </>
+      <FormTask formProps={formProps} />
+    </div>
   );
 }
 

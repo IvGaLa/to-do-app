@@ -1,4 +1,4 @@
-import ErrorMessage from "@components/content/add/ErrorMessage";
+import ErrorMessage from "@components/form/ErrorMessage";
 
 function InputField({ formData, handlerChange, name, validationErrors }) {
   return (
