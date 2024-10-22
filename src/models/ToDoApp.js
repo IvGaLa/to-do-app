@@ -1,6 +1,8 @@
 import { configData } from "@config/config";
 import { dbCon } from "@config/dbConnect";
 import { sanitizeInput } from "@validations/sanitize";
+import { getTodayDate } from "@lib/datetime";
+import { getLocale } from "@locales/es";
 
 class ToDoApp {
   tablename = ''
@@ -22,7 +24,6 @@ class ToDoApp {
 
   // Devuelve todas las tareas
   static async getAll() {
-    //this.getTableName()
     const sql = `SELECT * FROM ${this.tablename}`
     const response = await dbCon.execute(sql);
     return response.rows;
@@ -31,7 +32,6 @@ class ToDoApp {
 
   // Devuelve todas las tareas de un usuario
   static async getAllByUserId(userid) {
-    //this.getTableName()
     const sql = `SELECT * FROM ${this.tablename} WHERE user='${sanitizeInput(userid)}';`
     const response = await dbCon.execute(sql);
     return response.rows;
@@ -39,9 +39,8 @@ class ToDoApp {
 
 
   // Devuelve una tarea según su id
-  static async getTaskById(id) {
-    //this.getTableName()
-    const sql = `SELECT * FROM ${this.tablename} WHERE id=${parseInt(id)};`
+  static async getById(id) {
+    const sql = `SELECT * FROM ${this.tablename} WHERE id=${parseInt(sanitizeInput(id))};`
     const response = await dbCon.execute(sql);
     // Devuelve directamente la tarea
     return response.rows[0];
@@ -50,8 +49,6 @@ class ToDoApp {
 
   // Añade una tarea
   static async add(data) {
-    //this.getTableName()
-
     // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
     const fieldsToAdd = Object.values(data)
       .filter(field => field.value !== '' && field.value !== null && this.fields[field.name])
@@ -66,7 +63,7 @@ class ToDoApp {
     }).join('", "')
 
     const values = fieldsToAdd.map((field) => {
-      return field.value
+      return sanitizeInput(field.value)
     }).join('", "')
 
 
@@ -82,12 +79,25 @@ class ToDoApp {
 
   // Elimina una tarea por el id
   static async deleteById(id) {
-    //this.getTableName()
-    const sql = `DELETE FROM ${this.tablename} WHERE id=${id};`
+    const sql = `DELETE FROM ${this.tablename} WHERE id=${sanitizeInput(id)};`
     const response = await dbCon.execute(sql)
     return response;
   }
-}
+
+  // Actualiza el check de finalizado (finished)
+  static async setFinished(id) {
+    // Debemos actualizar el campo finished y el finishedAt
+    const finished = 1
+    const finishedAt = getTodayDate(getLocale("formatdatetimetodb"))
+
+    const sql = `UPDATE "${this.tablename}" SET finished=${finished}, finishedAt="${finishedAt}" WHERE id = ${sanitizeInput(id.value)}`
+
+    const response = await dbCon.execute(sql)
+
+    return response
+  }
+
+} // Fin clase ToDoApp
 
 
 // Usamos un Proxy para interceptar todas las llamadas a métodos estáticos

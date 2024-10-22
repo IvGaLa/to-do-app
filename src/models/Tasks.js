@@ -15,8 +15,8 @@ export class Tasks {
 
 
   // Devuelve una tarea según su id
-  static async getTaskById(id) {
-    return ToDoApp.getTaskById(id)
+  static async getById(id) {
+    return ToDoApp.getById(id)
   }
 
 
@@ -29,5 +29,10 @@ export class Tasks {
   // Elimina una tarea por el id
   static async deleteById(id) {
     return ToDoApp.deleteById(id)
+  }
+
+  // Actualiza el check de finalizado (finished)
+  static async setFinished(id) {
+    return ToDoApp.setFinished(id)
   }
 }

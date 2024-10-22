@@ -33,7 +33,7 @@ function Delete() {
     // Si hay errores, salimos... terminará mostrando que no se ha encontrado el registro.
     if (Object.keys(errors).length > 0) return;
 
-    const taskDelete = await Tasks.getTaskById(
+    const taskDelete = await Tasks.getById(
       idToDelete[idToDelete.id.name].value
     );
 

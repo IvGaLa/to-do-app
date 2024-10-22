@@ -19,6 +19,10 @@ export const routes = {
     name: 'delete',
     path: '/delete/:id',
   },
+  finish: {
+    name: 'finish',
+    path: '/finish/:id'
+  },
   deleteerror: {
     name: 'deleteerror',
     path: '/delete/error',

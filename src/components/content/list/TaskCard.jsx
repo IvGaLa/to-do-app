@@ -41,9 +41,11 @@ function TaskCard({ tasks, setTasks }) {
 
                 <div className=" border-t-2 border-gray-500">
                   <div className="flex gap-3 mt-3 justify-between">
-                    <IconLink to={`/${routes.finish.name}/${task.id}`}>
-                      <GrFormCheckmark />
-                    </IconLink>
+                    {task.finished != 1 && (
+                      <IconLink to={`/${routes.finish.name}/${task.id}`}>
+                        <GrFormCheckmark />
+                      </IconLink>
+                    )}
 
                     <IconLink to={`/${routes.modify.name}/${task.id}`}>
                       <GrEdit />
