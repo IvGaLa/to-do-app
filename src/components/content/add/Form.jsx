@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { DateTime } from "luxon";
 
 import { tasks } from "@config/tableTasks";
 import { Tasks } from "@models/Tasks";
 import { validateForm } from "@validations/tasks";
 import { getLocale } from "@locales/es";
 import FormTask from "@components/form/FormTask";
+import { getTodayDate } from "@lib/datetime";
 
 function Form({ setResultAdd }) {
   /**
@@ -44,9 +44,7 @@ function Form({ setResultAdd }) {
    */
   const resetValues = useCallback(() => {
     // Guardamos la fecha y hora actual, lo usamos para el createAt
-    const currentDateTime = DateTime.now().toFormat(
-      getLocale("formatdatetimetodb")
-    );
+    const currentDateTime = getTodayDate(getLocale("formatdatetimetodb"));
 
     const resetFields = Object.keys(formData).reduce((acc, key) => {
       acc[key] = { ...formData[key], value: "" };
@@ -114,7 +112,7 @@ function Form({ setResultAdd }) {
     const { lastInsertRowid } = response;
 
     // Recuperamos la tarea añadida
-    const lastInsertTask = await Tasks.getTaskById(lastInsertRowid);
+    const lastInsertTask = await Tasks.getById(lastInsertRowid);
 
     // Guardamos para mostrar la tarea añadida
     setResultAdd(lastInsertTask);

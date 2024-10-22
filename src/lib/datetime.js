@@ -10,3 +10,13 @@ export const formatDataTime = (date, format) => {
 
   return (date && format) ? DateTime.fromISO(date).toFormat(format) : date;
 };
+
+
+/**
+ * 
+ * Recuperamos el día de hoy según el formato que le pasemos por parámetros
+ * 
+ */
+export const getTodayDate = (format) => {
+  return DateTime.now().toFormat(format);
+}
