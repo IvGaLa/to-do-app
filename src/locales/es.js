@@ -1,13 +1,19 @@
 import { localstorage } from "@locales/localstorage";
-import { add } from "@locales/components/content/add";
-import { list } from "@locales/components/content/list";
+
 import { errors } from "@locales/validations.errors";
+
+import { home } from "@locales/components/home";
 import { footer } from "@locales/components/footer";
 import { header } from "@locales/components/header";
-import { home } from "@locales/components/home";
+import { loading } from "@locales/components/loading";
+
+import { add } from "@locales/components/content/add";
+import { list } from "@locales/components/content/list";
 import { modify } from "@locales/components/content/modify";
 import { _delete } from "@locales/components/content/delete";
+
 import { tasks } from "@locales/components/models/tasks";
+
 
 // Guardamos todos los textos disponibles en la aplicación
 const locale = {
@@ -27,6 +33,7 @@ const locale = {
     home,
     footer,
     header,
+    loading,
     content: {
       add,
       list,
