@@ -7,17 +7,23 @@ import TitlePage from "@components/TitlePage";
 import { configData } from "@config/config";
 
 import TaskCard from "@components/content/list/TaskCard";
+import Loading from "@components/Loading";
 
 function List() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const userid = localStorage.getItem(getLocale("localstorage.userid"));
 
   const { routes } = configData;
 
   useEffect(() => {
-    getTasks();
-  }, []);
+    if (tasks === null) {
+      getTasks();
+    } else {
+      setIsLoading(false);
+    }
+  }, [tasks]);
 
   const getTasks = async () => {
     const rows = await Tasks.getAllByUserId(userid);
@@ -25,23 +31,29 @@ function List() {
   };
 
   return (
-    <div>
-      <TitlePage>{getLocale("components.content.list.title")}</TitlePage>
-      {tasks.length !== 0 ? (
-        <TaskCard tasks={tasks} setTasks={setTasks} />
+    <>
+      {isLoading ? (
+        <Loading />
       ) : (
         <div>
-          <p>{getLocale("components.content.list.withouttasks")}</p>
-          <p>
-            {getLocale("components.content.list.click")}{" "}
-            <Link to={routes.add.path}>
-              {getLocale("components.content.list.here")}
-            </Link>{" "}
-            {getLocale("components.content.list.addnewtask")}
-          </p>
+          <TitlePage>{getLocale("components.content.list.title")}</TitlePage>
+          {tasks.length !== 0 ? (
+            <TaskCard tasks={tasks} setTasks={setTasks} />
+          ) : (
+            <div>
+              <p>{getLocale("components.content.list.withouttasks")}</p>
+              <p>
+                {getLocale("components.content.list.click")}{" "}
+                <Link to={routes.add.path}>
+                  {getLocale("components.content.list.here")}
+                </Link>{" "}
+                {getLocale("components.content.list.addnewtask")}
+              </p>
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 
