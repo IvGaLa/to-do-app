@@ -23,6 +23,10 @@ export const routes = {
     name: 'finish',
     path: '/finish/:id'
   },
+  open: {
+    name: 'open',
+    path: '/open/:id'
+  },
   deleteerror: {
     name: 'deleteerror',
     path: '/delete/error',

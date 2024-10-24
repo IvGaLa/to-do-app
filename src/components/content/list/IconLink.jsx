@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 
-function IconLink({ children, to }) {
+function IconLink({ children, to, finishedAt }) {
+  const cname =
+    finishedAt !== null
+      ? "bg-green-100 hover:bg-green-400"
+      : "bg-red-100 hover:bg-red-400";
+
   return (
     <Link
       to={to}
-      className="p-4 rounded-full text-gray-950 bg-gray-50 hover:bg-gray-200/75 flex gap-1.5 items-center text-sm justify-center"
+      className={`${cname} p-4 rounded-full text-gray-950 flex gap-1.5 items-center text-sm justify-center`}
     >
       {children}
     </Link>

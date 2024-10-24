@@ -1,4 +1,5 @@
-import { GrTrash, GrEdit, GrFormCheckmark } from "react-icons/gr";
+import { GrTrash, GrEdit } from "react-icons/gr";
+import { IoLockClosedOutline, IoLockOpenOutline } from "react-icons/io5";
 
 import SpanOrders from "@components/content/list/SpanOrders";
 import IconLink from "@components/content/list/IconLink";
@@ -43,17 +44,35 @@ function TaskCard({ tasks, setTasks }) {
 
                 <div className=" border-t-2 border-gray-500">
                   <div className="flex gap-3 mt-3 justify-between">
-                    {task.finishedAt === null && (
-                      <IconLink to={`/${routes.finish.name}/${task.id}`}>
-                        <GrFormCheckmark />
+                    {task.finishedAt === null ? (
+                      <IconLink
+                        // Tarea pendiente, mostramos icono para finalizarla
+                        finishedAt={task.finishedAt}
+                        to={`/${routes.finish.name}/${task.id}`}
+                      >
+                        <IoLockOpenOutline />
+                      </IconLink>
+                    ) : (
+                      <IconLink
+                        // Tarea finalizada, mostramos icono para reabrirla
+                        finishedAt={task.finishedAt}
+                        to={`/${routes.open.name}/${task.id}`}
+                      >
+                        <IoLockClosedOutline />
                       </IconLink>
                     )}
 
-                    <IconLink to={`/${routes.modify.name}/${task.id}`}>
+                    <IconLink
+                      finishedAt={task.finishedAt}
+                      to={`/${routes.modify.name}/${task.id}`}
+                    >
                       <GrEdit />
                     </IconLink>
 
-                    <IconLink to={`/${routes.delete.name}/${task.id}`}>
+                    <IconLink
+                      finishedAt={task.finishedAt}
+                      to={`/${routes.delete.name}/${task.id}`}
+                    >
                       <GrTrash />
                     </IconLink>
                   </div>

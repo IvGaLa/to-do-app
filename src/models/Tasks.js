@@ -31,9 +31,14 @@ export class Tasks {
     return ToDoApp.deleteById(id)
   }
 
-  // Actualiza la fecha en finishedAt
+  // Actualiza la fecha en finishedAt a la fecha actual
   static async setFinished(id) {
     return ToDoApp.setFinished(id)
+  }
+
+  // Actualiza la fecha en finishedAt a null
+  static async setOpened(id) {
+    return ToDoApp.setOpened(id)
   }
 
   // Hacemos un update de la tarea.

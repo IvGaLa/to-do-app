@@ -69,7 +69,7 @@ class ToDoApp {
     return response;
   }
 
-  // Actualiza el check de finalizado (finished)
+  // Actualiza finishedAt a la fecha actual (finished)
   static async setFinished(id) {
     // Actualizamos el campo finishedAt con la fecha actual
     const finishedAt = getTodayDate(getLocale("formatdatetimetodb"))
@@ -80,6 +80,18 @@ class ToDoApp {
 
     return response
   }
+
+
+  // Actualiza finishedAt a null (opened)
+  static async setOpened(id) {
+    // Actualizamos el campo finishedAt a null
+    const sql = `UPDATE "${this.tablename}" SET finishedAt=NULL WHERE id = ${sanitizeInput(id.value)}`
+
+    const response = await dbCon.execute(sql)
+
+    return response
+  }
+
 
   // Actualizo una tarea
   static async update(data) {
