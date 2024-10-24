@@ -8,7 +8,7 @@ import { Tasks } from "@models/Tasks";
 
 import FormTask from "@components/form/FormTask";
 import Loading from "@components/Loading";
-import Updated from "./Updated";
+import Updated from "@components/content/modify/Updated";
 
 function ModifyForm({ task }) {
   const initialFields = tasks.fields;
