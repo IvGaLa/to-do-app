@@ -8,7 +8,7 @@ import { configData } from "@config/config";
 import SetFinishedOk from "@components/content/modify/SetFinishedOk";
 import SetFinishedError from "@components/content/modify/SetFinishedError";
 
-// Marcamos como finalizada una tarea sin tener que mostrar el resto de datos, solo marcamos el "check" de finished.
+// Marcamos como finalizada una tarea asignando una fecha en finishedAt.
 function SetFinished() {
   const routeList = configData.routes.list;
   const navigate = useNavigate();

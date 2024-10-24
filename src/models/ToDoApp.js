@@ -71,11 +71,10 @@ class ToDoApp {
 
   // Actualiza el check de finalizado (finished)
   static async setFinished(id) {
-    // Debemos actualizar el campo finished y el finishedAt
-    const finished = 1
+    // Actualizamos el campo finishedAt con la fecha actual
     const finishedAt = getTodayDate(getLocale("formatdatetimetodb"))
 
-    const sql = `UPDATE "${this.tablename}" SET finished=${finished}, finishedAt="${finishedAt}" WHERE id = ${sanitizeInput(id.value)}`
+    const sql = `UPDATE "${this.tablename}" SET finishedAt="${finishedAt}" WHERE id = ${sanitizeInput(id.value)}`
 
     const response = await dbCon.execute(sql)
 

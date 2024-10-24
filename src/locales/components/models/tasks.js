@@ -4,7 +4,6 @@ export const tasks = {
     user: 'Usuario',
     title: 'Título',
     description: 'Descripción',
-    finished: 'Finalizada',
     createdAt: 'Creada',
     modifiedAt: 'Modificada',
     finishedAt: 'Finalizada',

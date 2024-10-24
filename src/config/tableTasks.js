@@ -3,7 +3,7 @@ import { getLocale } from "@locales/es"
 import { tableNames } from "@config/tableNames"
 import { validationTypes } from "@config/validationsTypes"
 
-const { required, integer, bool, datetime, maxLength } = validationTypes
+const { required, integer, datetime, maxLength } = validationTypes
 
 
 export const tasks = {
@@ -46,15 +46,6 @@ export const tasks = {
       validation: {
         required,
         maxLength: { ...maxLength, value: 100 },
-      }
-    },
-    finished: {
-      name: 'finished',
-      type: 'integer',
-      label: getLocale('models.tasks.label.finished'),
-      value: 0,
-      validation: {
-        bool,
       }
     },
     createdAt: {

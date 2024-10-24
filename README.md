@@ -41,7 +41,6 @@ CREATE TABLE tasks (
   user TEXT NOT NULL,
   title TEXT NOT NULL,
   description TEXT,
-  finished INTEGER DEFAULT 0,
   createdAt TEXT,
   modifiedAt TEXT,
   finishedAt TEXT

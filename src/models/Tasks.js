@@ -31,7 +31,7 @@ export class Tasks {
     return ToDoApp.deleteById(id)
   }
 
-  // Actualiza el check de finalizado (finished)
+  // Actualiza la fecha en finishedAt
   static async setFinished(id) {
     return ToDoApp.setFinished(id)
   }

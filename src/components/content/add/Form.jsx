@@ -61,10 +61,6 @@ function Form({ setResultAdd }) {
           localStorage.getItem(getLocale("localstorage.userid")) || // Si existe, cogemos el userid del localstorage
           getNewUserId(), // Si no existe generamos unos nuevo.
       },
-      [initialFields.finished.name]: {
-        ...initialFields.finished,
-        value: 0,
-      },
       [initialFields.createdAt.name]: {
         ...initialFields.createdAt,
         value: currentDateTime,
@@ -142,24 +138,11 @@ function Form({ setResultAdd }) {
     initialFields[initialFields.description.name],
   ];
 
-  /**
-   *
-   * Campos de fecha para el formulario
-   * Lo mismo que arriba pero para los campos tipo fecha/hora a mostrar en el formulario
-   *
-   */
-  const columnsDate = [
-    initialFields[initialFields.createdAt.name],
-    initialFields[initialFields.modifiedAt.name],
-    initialFields[initialFields.finishedAt.name],
-  ];
-
   const formProps = {
     handleFormSubmit,
     formData,
     initialFields,
     columnsText,
-    //columnsDate,
     validationErrors,
     handleInputChange,
     buttonText: getLocale("components.content.add.addbutton"),

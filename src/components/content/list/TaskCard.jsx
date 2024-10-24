@@ -27,7 +27,9 @@ function TaskCard({ tasks, setTasks }) {
             <div
               key={index}
               className={`${
-                task.finished ? taskFinished.completed : taskFinished.pending
+                task.finishedAt !== null
+                  ? taskFinished.completed
+                  : taskFinished.pending
               } relative group overflow-hidden p-8 rounded-xl border hover:shadow-2xl`}
             >
               <div className="relative">
@@ -41,7 +43,7 @@ function TaskCard({ tasks, setTasks }) {
 
                 <div className=" border-t-2 border-gray-500">
                   <div className="flex gap-3 mt-3 justify-between">
-                    {task.finished != 1 && (
+                    {task.finishedAt === null && (
                       <IconLink to={`/${routes.finish.name}/${task.id}`}>
                         <GrFormCheckmark />
                       </IconLink>
