@@ -1,8 +1,9 @@
-# ⚠️ Proyecto en Desarrollo ⚠️
+# 😃 Proyecto Funcional 😃
 
-Este proyecto **está actualmente en desarrollo**. Esto significa que pueden presentarse fallos, errores o características que aún no están completamente implementadas.<br /> Agradecemos tu comprensión y cualquier **feedback** que puedas proporcionar.<br /><br />
+Actualmente el proyecto está en fase funcional aunque es posible que se vayan actualizando algunas cosas o corrigiendo errores.<br />
+Agradecemos tu comprensión y cualquier **feedback** que puedas proporcionar.<br /><br />
 
-¡Gracias por tu interés en este proyecto!
+¡Gracias por tu interés en este proyecto!<br />
 
 # 📝 To Do App
 
