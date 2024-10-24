@@ -31,15 +31,16 @@ function FormTask({ formProps }) {
         />
       ))}
 
-      {columnsDate.map((columnDate, index) => (
-        <DateField
-          key={index}
-          name={columnDate.name}
-          formData={formData}
-          validationErrors={validationErrors}
-          handlerChange={handleInputChange}
-        />
-      ))}
+      {columnsDate &&
+        columnsDate.map((columnDate, index) => (
+          <DateField
+            key={index}
+            name={columnDate.name}
+            formData={formData}
+            validationErrors={validationErrors}
+            handlerChange={handleInputChange}
+          />
+        ))}
 
       <div className="flex justify-start mt-6">
         <button

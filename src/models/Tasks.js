@@ -35,4 +35,9 @@ export class Tasks {
   static async setFinished(id) {
     return ToDoApp.setFinished(id)
   }
+
+  // Hacemos un update de la tarea.
+  static async update(data) {
+    return ToDoApp.update(data)
+  }
 }

@@ -23,7 +23,7 @@ function Delete() {
   const [taskToDelete, setTaskToDelete] = useState();
 
   useEffect(() => {
-    getTaskToDelete(idToDelete);
+    getTaskToDelete();
   }, []);
 
   const getTaskToDelete = async () => {

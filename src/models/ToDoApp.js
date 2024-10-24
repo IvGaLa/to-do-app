@@ -50,22 +50,7 @@ class ToDoApp {
   // Añade una tarea
   static async add(data) {
     // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
-    const fieldsToAdd = Object.values(data)
-      .filter(field => field.value !== '' && field.value !== null && this.fields[field.name])
-      .map(field => ({
-        name: field.name,
-        value: field.value
-      }));
-
-
-    const fields = fieldsToAdd.map((field) => {
-      return field.name
-    }).join('", "')
-
-    const values = fieldsToAdd.map((field) => {
-      return sanitizeInput(field.value)
-    }).join('", "')
-
+    const { fields, values } = this.getValidFieldsToAdd(data)
 
     const sql = `INSERT INTO "${this.tablename}" ("${fields}") VALUES ("${values}");`
 
@@ -95,6 +80,53 @@ class ToDoApp {
     const response = await dbCon.execute(sql)
 
     return response
+  }
+
+  // Actualizo una tarea
+  static async update(data) {
+    // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
+    const valuesToUpdate = this.getValidFieldsToUpdate(data)
+    const sql = `UPDATE "${this.tablename}" SET ${valuesToUpdate} WHERE id = ${data.id.value};`
+    const response = await dbCon.execute(sql)
+
+    // Devolvemos el objeto response completo ya que en el insert no hay rows como tal.
+    return response;
+  }
+
+  // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
+  static getValidFields(data) {
+    return Object.values(data)
+      .filter(field => field.value !== '' && field.value !== null && this.fields[field.name])
+      .map(field => ({
+        name: field.name,
+        value: field.value
+      }));
+  }
+
+  // Obtengo los datos para hacer el update
+  static getValidFieldsToUpdate(data) {
+    const validFields = this.getValidFields(data)
+    return validFields.map((field) => {
+      const fieldValue = Number.isInteger(field.value) ? field.value : `'${field.value}'`
+      return `"${field.name}" = ${fieldValue}`
+    }).join(', ')
+  }
+
+
+  // Obtengo los fields y los values por separado separados por comas para el insert.
+  static getValidFieldsToAdd(data) {
+    const validFields = this.getValidFields(data)
+
+    const fields = validFields.map((field) => {
+      return field.name
+    }).join('", "')
+
+    const values = validFields.map((field) => {
+      return sanitizeInput(field.value)
+    }).join('", "')
+
+
+    return { fields, values }
   }
 
 } // Fin clase ToDoApp
