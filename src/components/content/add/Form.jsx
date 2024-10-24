@@ -159,7 +159,7 @@ function Form({ setResultAdd }) {
     formData,
     initialFields,
     columnsText,
-    columnsDate,
+    //columnsDate,
     validationErrors,
     handleInputChange,
     buttonText: getLocale("components.content.add.addbutton"),
