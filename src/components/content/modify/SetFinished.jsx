@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { tasks } from "@config/tableTasks";
 import { Tasks } from "@models/Tasks";
 import { configData } from "@config/config";
+import { getLocale } from "@locales/es";
 
-import SetFinishedOk from "@components/content/modify/SetFinishedOk";
-import SetFinishedError from "@components/content/modify/SetFinishedError";
+import SetMessage from "@components/content/modify/SetMessage";
 
 // Marcamos como finalizada una tarea asignando una fecha en finishedAt.
 function SetFinished() {
@@ -42,9 +42,13 @@ function SetFinished() {
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
         {isFinished ? (
-          <SetFinishedOk backToList={backToList} />
+          <SetMessage backToList={backToList} color="green">
+            {getLocale("components.content.modify.finished")}
+          </SetMessage>
         ) : (
-          <SetFinishedError backToList={backToList} />
+          <SetMessage backToList={backToList} color="red">
+            {getLocale("components.content.modify.finishedError")}
+          </SetMessage>
         )}
       </div>
     </div>

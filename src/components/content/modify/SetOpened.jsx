@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { tasks } from "@config/tableTasks";
 import { Tasks } from "@models/Tasks";
 import { configData } from "@config/config";
+import { getLocale } from "@locales/es";
 
-import SetOpenedOk from "@components/content/modify/SetOpenedOk";
-import SetOpenedError from "@components/content/modify/SetOpenedError";
+import SetMessage from "@components/content/modify/SetMessage";
 
 // Marcamos como abierta una tarea asignando null a finishedAt.
 function SetOpened() {
@@ -42,9 +42,13 @@ function SetOpened() {
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
         {isOpened ? (
-          <SetOpenedOk backToList={backToList} />
+          <SetMessage backToList={backToList} color="green">
+            {getLocale("components.content.modify.opened")}
+          </SetMessage>
         ) : (
-          <SetOpenedError backToList={backToList} />
+          <SetMessage backToList={backToList} color="red">
+            {getLocale("components.content.modify.openedError")}
+          </SetMessage>
         )}
       </div>
     </div>
