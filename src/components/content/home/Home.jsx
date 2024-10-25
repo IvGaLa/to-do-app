@@ -19,7 +19,7 @@ function Home() {
         >
           {getLocale("githubUser")}
         </a>
-        {getLocale("components.home.accessToRepo")}
+        . {getLocale("components.home.accessToRepo")}
         <a
           href="https://github.com/IvGaLa/to-do-app"
           className="text-blue-500 hover:text-blue-700"
