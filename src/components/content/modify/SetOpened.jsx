@@ -6,6 +6,7 @@ import { Tasks } from "@models/Tasks";
 import { configData } from "@config/config";
 import { getLocale } from "@locales/es";
 
+import Loading from "@components/Loading";
 import SetMessage from "@components/content/modify/SetMessage";
 
 // Marcamos como abierta una tarea asignando null a finishedAt.
@@ -18,6 +19,8 @@ function SetOpened() {
   };
 
   const [isOpened, setIsOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [response, setResponse] = useState(null);
 
   const { id } = useParams();
 
@@ -33,25 +36,39 @@ function SetOpened() {
     taskToOpen();
   }, []);
 
+  useEffect(() => {
+    if (response !== null) {
+      setIsLoading(false);
+
+      response.rowsAffected === 1 ? setIsOpened(true) : setIsOpened(false);
+    }
+  }, [response]);
+
   const taskToOpen = async () => {
-    const response = await Tasks.setOpened(idToOpen);
-    response.rowsAffected === 1 ? setIsOpened(true) : setIsOpened(false);
+    const res = await Tasks.setOpened(idToOpen);
+    setResponse(res);
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
-        {isOpened ? (
-          <SetMessage backToList={backToList} color="green">
-            {getLocale("components.content.modify.opened")}
-          </SetMessage>
-        ) : (
-          <SetMessage backToList={backToList} color="red">
-            {getLocale("components.content.modify.openedError")}
-          </SetMessage>
-        )}
-      </div>
-    </div>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+            {isOpened ? (
+              <SetMessage backToList={backToList} color="green">
+                {getLocale("components.content.modify.opened")}
+              </SetMessage>
+            ) : (
+              <SetMessage backToList={backToList} color="red">
+                {getLocale("components.content.modify.openedError")}
+              </SetMessage>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

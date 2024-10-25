@@ -6,6 +6,7 @@ import { Tasks } from "@models/Tasks";
 import { configData } from "@config/config";
 import { getLocale } from "@locales/es";
 
+import Loading from "@components/Loading";
 import SetMessage from "@components/content/modify/SetMessage";
 
 // Marcamos como finalizada una tarea asignando una fecha en finishedAt.
@@ -14,6 +15,9 @@ function SetFinished() {
   const navigate = useNavigate();
 
   const [isFinished, setIsFinished] = useState(false);
+  const [response, setResponse] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
 
@@ -29,9 +33,16 @@ function SetFinished() {
     taskToFinish();
   }, []);
 
+  useEffect(() => {
+    if (response !== null) {
+      setIsLoading(false);
+      response.rowsAffected === 1 ? setIsFinished(true) : setIsFinished(false);
+    }
+  }, [response]);
+
   const taskToFinish = async () => {
-    const response = await Tasks.setFinished(idToFinish);
-    response.rowsAffected === 1 ? setIsFinished(true) : setIsFinished(false);
+    const res = await Tasks.setFinished(idToFinish);
+    setResponse(res);
   };
 
   const backToList = () => {
@@ -39,19 +50,25 @@ function SetFinished() {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
-        {isFinished ? (
-          <SetMessage backToList={backToList} color="green">
-            {getLocale("components.content.modify.finished")}
-          </SetMessage>
-        ) : (
-          <SetMessage backToList={backToList} color="red">
-            {getLocale("components.content.modify.finishedError")}
-          </SetMessage>
-        )}
-      </div>
-    </div>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+            {isFinished ? (
+              <SetMessage backToList={backToList} color="green">
+                {getLocale("components.content.modify.finished")}
+              </SetMessage>
+            ) : (
+              <SetMessage backToList={backToList} color="red">
+                {getLocale("components.content.modify.finishedError")}
+              </SetMessage>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
