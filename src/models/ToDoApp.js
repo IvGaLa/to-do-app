@@ -4,26 +4,19 @@ import { sanitizeInput } from "@validations/sanitize";
 import { getTodayDate } from "@lib/datetime";
 import { getLocale } from "@locales/es";
 
-class ToDoApp {
+export class ToDoApp {
   tablename = ''
   fields = {}
 
   // Establece el nombre de la tabla del modelo que lo ha llamado y sus correspondientes campos.
-  static getTableName() {
-    // Crear un nuevo objeto de error para obtener la pila de llamadas
-    const stack = new Error().stack;
-
-    // Analizar la pila de llamadas para encontrar la clase que llamó a este método
-    // Cogemos el nombre del modelo que hace la llamada y lo pasamos a lowercase
-    const caller = stack.split('\n')[3].split(' ')[5].split('.')[0].toLowerCase();
-
-    // Asignamos el nombre de la tabla según el nombre del modelo y los campos.
-    this.tablename = configData.tables[caller].name
-    this.fields = configData.tables[caller].fields
+  static getTableName(table = 'tasks') {
+    this.tablename = configData.tables[table].name
+    this.fields = configData.tables[table].fields
   }
 
   // Devuelve todas las tareas
-  static async getAll() {
+  static async getAll(table = 'tasks') {
+    this.getTableName(table)
     const sql = `SELECT * FROM ${this.tablename}`
     const response = await dbCon.execute(sql);
     return response.rows;
@@ -31,7 +24,8 @@ class ToDoApp {
 
 
   // Devuelve todas las tareas de un usuario
-  static async getAllByUserId(userid) {
+  static async getAllByUserId(userid, table = 'tasks') {
+    this.getTableName(table)
     const sql = `SELECT * FROM ${this.tablename} WHERE user='${sanitizeInput(userid)}';`
     const response = await dbCon.execute(sql);
     return response.rows;
@@ -39,7 +33,8 @@ class ToDoApp {
 
 
   // Devuelve una tarea según su id
-  static async getById(id) {
+  static async getById(id, table = 'tasks') {
+    this.getTableName(table)
     const sql = `SELECT * FROM ${this.tablename} WHERE id=${parseInt(sanitizeInput(id))};`
     const response = await dbCon.execute(sql);
     // Devuelve directamente la tarea
@@ -48,7 +43,8 @@ class ToDoApp {
 
 
   // Añade una tarea
-  static async add(data) {
+  static async add(data, table = 'tasks') {
+    this.getTableName(table)
     // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
     const { fields, values } = this.getValidFieldsToAdd(data)
 
@@ -63,14 +59,16 @@ class ToDoApp {
 
 
   // Elimina una tarea por el id
-  static async deleteById(id) {
+  static async deleteById(id, table = 'tasks') {
+    this.getTableName(table)
     const sql = `DELETE FROM ${this.tablename} WHERE id=${sanitizeInput(id)};`
     const response = await dbCon.execute(sql)
     return response;
   }
 
   // Actualiza finishedAt a la fecha actual (finished)
-  static async setFinished(id) {
+  static async setFinished(id, table = 'tasks') {
+    this.getTableName(table)
     // Actualizamos el campo finishedAt con la fecha actual
     const finishedAt = getTodayDate(getLocale("formatdatetimetodb"))
 
@@ -83,7 +81,8 @@ class ToDoApp {
 
 
   // Actualiza finishedAt a null (opened)
-  static async setOpened(id) {
+  static async setOpened(id, table = 'tasks') {
+    this.getTableName(table)
     // Actualizamos el campo finishedAt a null
     const sql = `UPDATE "${this.tablename}" SET finishedAt=NULL WHERE id = ${sanitizeInput(id.value)}`
 
@@ -94,7 +93,8 @@ class ToDoApp {
 
 
   // Actualizo una tarea
-  static async update(data) {
+  static async update(data, table = 'tasks') {
+    this.getTableName(table)
     // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
     const valuesToUpdate = this.getValidFieldsToUpdate(data)
     const sql = `UPDATE "${this.tablename}" SET ${valuesToUpdate} WHERE id = ${data.id.value};`
@@ -105,7 +105,8 @@ class ToDoApp {
   }
 
   // Obtengo un array solo con los campos del formulario que no son null y existen en el modelo Tasks
-  static getValidFields(data) {
+  static getValidFields(data, table = 'tasks') {
+    this.getTableName(table)
     return Object.values(data)
       .filter(field => field.value !== '' && field.value !== null && this.fields[field.name])
       .map(field => ({
@@ -115,7 +116,8 @@ class ToDoApp {
   }
 
   // Obtengo los datos para hacer el update
-  static getValidFieldsToUpdate(data) {
+  static getValidFieldsToUpdate(data, table = 'tasks') {
+    this.getTableName(table)
     const validFields = this.getValidFields(data)
     return validFields.map((field) => {
       const fieldValue = Number.isInteger(field.value) ? field.value : `'${field.value}'`
@@ -125,7 +127,8 @@ class ToDoApp {
 
 
   // Obtengo los fields y los values por separado separados por comas para el insert.
-  static getValidFieldsToAdd(data) {
+  static getValidFieldsToAdd(data, table = 'tasks') {
+    this.getTableName(table)
     const validFields = this.getValidFields(data)
 
     const fields = validFields.map((field) => {
@@ -140,25 +143,4 @@ class ToDoApp {
     return { fields, values }
   }
 
-} // Fin clase ToDoApp
-
-
-// Usamos un Proxy para interceptar todas las llamadas a métodos estáticos
-// Con esto lo que conseguimos es que cada vez que se llame a un método de la clase ToDoApp se ejecute ANTES el método getTableName para establer esos valores previos a las consultas.
-const ToDoAppProxy = new Proxy(ToDoApp, {
-  get(target, propKey) {
-    const origMethod = target[propKey];
-
-    if (typeof origMethod === 'function') {
-      return function (...args) {
-        // Llamamos automáticamente a getTableName antes de cualquier método estático
-        target.getTableName();
-        return origMethod.apply(target, args);
-      };
-    }
-
-    return origMethod;
-  },
-});
-
-export { ToDoAppProxy as ToDoApp };
+}
