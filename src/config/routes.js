@@ -19,14 +19,18 @@ export const routes = {
     name: 'delete',
     path: '/delete/:id',
   },
-  finish: {
-    name: 'finish',
-    path: '/finish/:id'
+  toggle: {
+    name: 'toggle',
+    path: '/toggle/:id/:state' // state = 1 or 0 (finished or opened)
   },
-  open: {
-    name: 'open',
-    path: '/open/:id'
-  },
+  // finish: {
+  //   name: 'finish',
+  //   path: '/finish/:id'
+  // },
+  // open: {
+  //   name: 'open',
+  //   path: '/open/:id'
+  // },
   deleteerror: {
     name: 'deleteerror',
     path: '/delete/error',

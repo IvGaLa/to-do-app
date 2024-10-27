@@ -66,31 +66,21 @@ export class ToDoApp {
     return response;
   }
 
-  // Actualiza finishedAt a la fecha actual (finished)
-  static async setFinished(id, table = 'tasks') {
-    this.getTableName(table)
-    // Actualizamos el campo finishedAt con la fecha actual
-    const finishedAt = getTodayDate(getLocale("formatdatetimetodb"))
 
-    const sql = `UPDATE "${this.tablename}" SET finishedAt="${finishedAt}" WHERE id = ${sanitizeInput(id.value)}`
+
+  // Actualiza la fecha en finishedAt a la fecha actual o a null dependiende de state
+  static async setToggle(id, state, table = 'tasks') {
+    this.getTableName(table)
+
+    const finishedAt = (state === 1) ? `"${getTodayDate(getLocale("formatdatetimetodb"))}"` : 'NULL'
+
+    const sql = `UPDATE "${this.tablename}" SET finishedAt=${finishedAt} WHERE id = ${sanitizeInput(id.value)}`
 
     const response = await dbCon.execute(sql)
 
     return response
+
   }
-
-
-  // Actualiza finishedAt a null (opened)
-  static async setOpened(id, table = 'tasks') {
-    this.getTableName(table)
-    // Actualizamos el campo finishedAt a null
-    const sql = `UPDATE "${this.tablename}" SET finishedAt=NULL WHERE id = ${sanitizeInput(id.value)}`
-
-    const response = await dbCon.execute(sql)
-
-    return response
-  }
-
 
   // Actualizo una tarea
   static async update(data, table = 'tasks') {

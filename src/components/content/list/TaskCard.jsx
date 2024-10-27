@@ -48,7 +48,7 @@ function TaskCard({ tasks, setTasks }) {
                       <IconLink
                         // Tarea pendiente, mostramos icono para finalizarla
                         finishedAt={task.finishedAt}
-                        to={`/${routes.finish.name}/${task.id}`}
+                        to={`/${routes.toggle.name}/${task.id}/1`}
                       >
                         <IoLockOpenOutline />
                       </IconLink>
@@ -56,7 +56,7 @@ function TaskCard({ tasks, setTasks }) {
                       <IconLink
                         // Tarea finalizada, mostramos icono para reabrirla
                         finishedAt={task.finishedAt}
-                        to={`/${routes.open.name}/${task.id}`}
+                        to={`/${routes.toggle.name}/${task.id}/0`}
                       >
                         <IoLockClosedOutline />
                       </IconLink>
