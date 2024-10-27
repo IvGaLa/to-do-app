@@ -1,3 +1,7 @@
+/**
+ * Componente para mostrar un modal con los datos de la tarea a eliminar.
+ */
+
 import { Link } from "react-router-dom";
 
 import { configData } from "@config/config";
@@ -9,6 +13,7 @@ import DeleteButton from "@components/content/delete/DeleteButton";
 
 const ConfirmDelete = ({ task }) => {
   const routeList = configData.routes.list.path;
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full">

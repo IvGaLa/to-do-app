@@ -1,3 +1,7 @@
+/**
+ * Componente para mostrar la tarea a eliminar o un mensaje de error si la tarea no se encuentra.
+ */
+
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -26,6 +30,11 @@ function Delete() {
     getTaskToDelete();
   }, []);
 
+  /**
+   *
+   * Recuperamos la tarea a eliminar o mostramos mensaje de error si no la encontramos o el id no es válido
+   *
+   */
   const getTaskToDelete = async () => {
     // Validamos los datos del id
     const errors = validateForm(idToDelete);

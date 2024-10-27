@@ -1,3 +1,7 @@
+/**
+ * Componente dónde llamamos al formulario para añadir una nueva tarea.
+ */
+
 import { useEffect, useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -5,13 +9,14 @@ import { tasks } from "@config/tableTasks";
 import { Tasks } from "@models/Tasks";
 import { validateForm } from "@validations/tasks";
 import { getLocale } from "@locales/es";
-import FormTask from "@components/form/FormTask";
 import { getTodayDate } from "@lib/datetime";
+
+import FormTask from "@components/form/FormTask";
 
 function Form({ setResultAdd }) {
   /**
    *
-   * Elimina el campo 'id' que no será usado en el formulario
+   * 'Elimina' el campo 'id' que no será usado en el formulario
    *
    */
   const { id, ...initialFields } = tasks.fields;
@@ -27,7 +32,7 @@ function Form({ setResultAdd }) {
 
   /**
    *
-   * Función para generar un nuevo User ID si no existe
+   * Función para generar un nuevo User ID si no existe el userid en el localstorage.
    *
    */
   const getNewUserId = useCallback(() => {
@@ -108,6 +113,7 @@ function Form({ setResultAdd }) {
     const { lastInsertRowid } = response;
 
     // Recuperamos la tarea añadida
+    // Hacemos esta consulta en lugar de utilizar los datos añadidos en el formulario ya que los de la nueva tarea en la base de datos están limpios.
     const lastInsertTask = await Tasks.getById(lastInsertRowid);
 
     // Guardamos para mostrar la tarea añadida

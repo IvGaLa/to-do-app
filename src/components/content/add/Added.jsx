@@ -1,3 +1,7 @@
+/**
+ * Componente para mostrar mensaje de tarea añadida correctamente.
+ */
+
 import { useNavigate } from "react-router-dom";
 
 import { getLocale } from "@locales/es";
