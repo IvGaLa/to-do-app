@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar un pequño mensaje de "cargando" con algún efecto
+ *
+ */
+
 import { getLocale } from "@locales/es";
 
 // Mostramos un mensaje de carga

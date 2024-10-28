@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar un campo input tipo datetime-local para los campos de fecha del formulario
+ *
+ */
+
 import { useState } from "react";
 
 import ErrorMessage from "@components/form/ErrorMessage";

@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar un campo input tipo text
+ *
+ */
+
 import { useState } from "react";
 
 import ErrorMessage from "@components/form/ErrorMessage";

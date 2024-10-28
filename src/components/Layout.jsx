@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para el Layout general de la página
+ *
+ */
+
 import Footer from "@components/footer/Footer";
 import Header from "@components/header/Header";
 

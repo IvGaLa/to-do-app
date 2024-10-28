@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar un mensaje de información con estilos predefinidos.
+ *
+ */
+
 function InfoMessage({ info }) {
   return (
     <>

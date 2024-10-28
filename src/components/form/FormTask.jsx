@@ -1,13 +1,22 @@
+/**
+ *
+ * Componente para gestionar el formulario de las tareas, tanto para modificar como para añadir.
+ *
+ */
+
 import DateField from "@components/form/DateField";
 import InputField from "@components/form/InputField";
 
 function FormTask({ formProps }) {
+  /**
+   * Recuperamos las propiedades del formulario
+   */
   const {
     handleFormSubmit,
     formData,
     initialFields,
     columnsText,
-    columnsDate,
+    columnsDate, // Los campos date son opcionales.
     validationErrors,
     handleInputChange,
     buttonText,

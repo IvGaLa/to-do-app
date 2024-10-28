@@ -1,5 +1,7 @@
 /**
+ *
  * Componente para mostrar un modal con los datos de la tarea a eliminar.
+ *
  */
 
 import { Link } from "react-router-dom";

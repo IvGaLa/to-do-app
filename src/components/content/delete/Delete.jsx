@@ -1,5 +1,7 @@
 /**
+ *
  * Componente para mostrar la tarea a eliminar o un mensaje de error si la tarea no se encuentra.
+ *
  */
 
 import { useParams } from "react-router-dom";

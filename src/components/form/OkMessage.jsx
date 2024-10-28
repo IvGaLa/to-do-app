@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar un mensaje de ok con estilos predefinidos.
+ *
+ */
+
 function OkMessage({ ok }) {
   return (
     <>

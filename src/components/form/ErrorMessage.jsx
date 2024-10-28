@@ -1,3 +1,10 @@
+/**
+ *
+ * Componente para mostrar un mensaje de error con estilos predefinidos.
+ * Para los errores de validación del fomrulario
+ *
+ */
+
 function ErrorMessage({ error }) {
   return (
     <>
