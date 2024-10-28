@@ -1,3 +1,10 @@
+/**
+ * *** Obsoleto ***
+ *
+ * Componente para mostrar los campos de createdAt, modifiedAt y finishedAt en el listado
+ *
+ */
+
 import { formatDataTime } from "@lib/datetime";
 import { getLocale } from "@locales/es";
 

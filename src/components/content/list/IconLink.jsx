@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente que genera un html anchor según las props recibidas.
+ *
+ */
+
 import { Link } from "react-router-dom";
 
 function IconLink({ children, to, finishedAt }) {

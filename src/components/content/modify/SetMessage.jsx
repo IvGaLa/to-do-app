@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar un mensaje de estado para la operación de SetToggle
+ *
+ */
+
 import { getLocale } from "@locales/es";
 
 function SetMessage({ backToList, children, color }) {

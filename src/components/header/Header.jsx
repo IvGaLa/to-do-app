@@ -1,3 +1,9 @@
+/**
+ * 
+ * Componente para mostrar el header de la página.
+ * 
+ */
+
 import { configData } from "@config/config";
 import { getLocale } from "@locales/es";
 

@@ -1,3 +1,7 @@
+/**
+ * Componente para el home
+ */
+
 import { getLocale } from "@locales/es";
 
 function Home() {

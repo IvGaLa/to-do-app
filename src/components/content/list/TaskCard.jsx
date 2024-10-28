@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar una tarjeta por cada tarea con su correspondiente información.
+ *
+ */
+
 import { GrTrash, GrEdit } from "react-icons/gr";
 import { IoLockClosedOutline, IoLockOpenOutline } from "react-icons/io5";
 
@@ -8,6 +14,11 @@ import { configData } from "@config/config";
 function TaskCard({ tasks, setTasks }) {
   const { routes } = configData;
 
+  /**
+   *
+   * Estilos para simular una tarea abierta (rojo) o finalizada (verde)
+   *
+   */
   const taskFinished = {
     completed:
       "bg-green-200 hover:shadow-green-800 hover:border-2 hover:border-green-600 text-green-900",

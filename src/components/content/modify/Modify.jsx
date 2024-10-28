@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para gestionar la modificación de tareas.
+ *
+ */
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -17,7 +23,9 @@ import ModifyForm from "@components/content/modify/ModifyForm";
 function Modify() {
   const { id } = useParams();
 
-  // Solo mantenemos la clave 'id' con su estructura y modificamos 'value'
+  /**
+   * Solo mantenemos la clave 'id' con su estructura y modificamos 'value'
+   */
   const idToEdit = {
     id: {
       ...tasks.fields.id, // Mantiene la estructura completa de 'id'
@@ -25,12 +33,21 @@ function Modify() {
     },
   };
 
+  /**
+   * Inicializo el hook useNavigate para redireccionar mas adelante.
+   */
   const navigate = useNavigate();
 
+  /**
+   * Estados para la tarea a editar, el componente de carga y los errores de la validación del formulario
+   */
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState(null);
 
+  /**
+   * Recuperamos la tarea a editar
+   */
   const getTaskToEdit = async () => {
     // Validamos los datos del id
     const ValidateErrors = validateForm(idToEdit);
@@ -51,6 +68,9 @@ function Modify() {
     taskToEdit === null ? getTaskToEdit() : setIsLoading(false);
   }, [taskToEdit]);
 
+  /**
+   * Manejador para el botón de "volver"
+   */
   const handlerBackToList = () => {
     const routeList = configData.routes.list.path;
     return navigate(routeList);

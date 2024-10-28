@@ -1,3 +1,9 @@
+/**
+ *
+ * Muestra un html anchor para el menú del header
+ *
+ */
+
 import { Link } from "react-router-dom";
 
 function LinkHeader({ children, to }) {

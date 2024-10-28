@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para mostrar el footer de la página.
+ *
+ */
+
 import { getLocale } from "@locales/es";
 
 function Footer() {

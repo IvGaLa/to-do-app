@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente en el que se muestra un pequeño menú para gestionar la ordenación de las tareas.
+ *
+ */
+
 import { useState } from "react";
 import { GrLinkDown, GrLinkUp } from "react-icons/gr";
 
@@ -5,12 +11,27 @@ import { tasks as tasksFields } from "@config/tableTasks";
 import { sortBy, sortType } from "@lib/sorting";
 
 function SpanOrders({ tasks, setTasks }) {
+  /**
+   *
+   * Hace una llamada de ordenación de las tareas listadas
+   *
+   */
   const handlerSorting = (orderBy) => {
     setTasks(sortBy({ tasks, orderBy, sortOrder, setSortOrder }));
   };
 
+  /**
+   *
+   * Guarda el estado de ordenación (ASC/DESC) de la columna seleccionada.
+   *
+   */
   const [sortOrder, setSortOrder] = useState(sortType);
 
+  /**
+   *
+   * Guardamos las columnas por las que queremos ordenar las tareas
+   *
+   */
   const columns = [
     tasksFields.fields[tasksFields.fields.title.name],
     tasksFields.fields[tasksFields.fields.description.name],

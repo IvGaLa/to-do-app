@@ -1,3 +1,9 @@
+/**
+ *
+ * Componente para gestionar el cambio de estado de una tarea entre finalizada/abierta
+ *
+ */
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -9,18 +15,30 @@ import { getLocale } from "@locales/es";
 import Loading from "@components/Loading";
 import SetMessage from "@components/content/modify/SetMessage";
 
-// Marcamos como finalizada una tarea asignando una fecha en finishedAt.
 function SetToggle() {
   const routeList = configData.routes.list;
   const navigate = useNavigate();
 
+  /**
+   * Definición de estados
+   * isToggle: Guarda si ya se ha guardado el nuevo estado a modificar
+   * response: Guarda la respuesta de la consulta a la BD
+   * isLoading: Guarda si debe mostrar o no el mensaje de "Loading"
+   */
   const [isToggle, setIsToggle] = useState(false);
   const [response, setResponse] = useState(null);
-
   const [isLoading, setIsLoading] = useState(true);
 
-  // Si es 0 lo pongo a null si es 1 le pongo la fecha actual
+  /**
+   * Recuperamos los parámetros de la url
+   * id: El id de la tarea a cambiar el estado
+   * state (stateParam): Si es 0 es que la tarea está finalizada y la queremos abrir, si es 1 la tarea está abierta y la queremos cerrar
+   */
   const { id, state: stateParam } = useParams();
+
+  /**
+   * Pasamos a int el parámetro stateParam (en la url viene como state)
+   */
   const state = parseInt(stateParam);
 
   // Solo mantenemos la clave 'id' con su estructura y modificamos 'value'

@@ -1,3 +1,8 @@
+/**
+ * Componente para el listado de las tareas.
+ * Gestiona un estado de carga de los datos y si existen tareas, las lista.
+ */
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,13 +15,28 @@ import TaskCard from "@components/content/list/TaskCard";
 import Loading from "@components/Loading";
 
 function List() {
+  /**
+   *
+   * Estados de carga y el listado de tareas
+   *
+   */
   const [tasks, setTasks] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  /**
+   *
+   * Recuperamos el userid del localstorage, si no existiese, mostrará un mensaje de no hay tareas.
+   *
+   */
   const userid = localStorage.getItem(getLocale("localstorage.userid"));
 
   const { routes } = configData;
 
+  /**
+   *
+   * Si ya tenemos tareas, dejamos de mostrar el Loading
+   *
+   */
   useEffect(() => {
     if (tasks === null) {
       getTasks();
@@ -25,6 +45,11 @@ function List() {
     }
   }, [tasks]);
 
+  /**
+   *
+   * Recuperamos las tareas
+   *
+   */
   const getTasks = async () => {
     const rows = await Tasks.getAllByUserId(userid);
     setTasks(rows);
