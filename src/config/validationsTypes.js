@@ -1,3 +1,11 @@
+/**
+ * 
+ * Fichero de configuración para las validaciones de los formularios
+ * 
+ * Guarda el valor de la validación a realizar y el mensaje de error a mostrar si no la pasa.
+ * 
+ */
+
 import { getLocale } from "@locales/es"
 
 export const validationTypes = {

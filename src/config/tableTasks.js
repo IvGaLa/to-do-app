@@ -1,3 +1,11 @@
+/**
+ * 
+ * Fichero de configuración para la definición de la tabla Tasks
+ * 
+ * Contiene información del nombre de los campos de la tabla, además los labels para los formularios y las validaciones
+ * 
+ */
+
 import { getLocale } from "@locales/es"
 
 import { tableNames } from "@config/tableNames"

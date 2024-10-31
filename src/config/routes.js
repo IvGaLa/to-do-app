@@ -1,3 +1,9 @@
+/**
+ * 
+ * Fichero de configuración para las rutas.
+ * 
+ */
+
 export const routes = {
   home: {
     name: 'home',
@@ -23,14 +29,6 @@ export const routes = {
     name: 'toggle',
     path: '/toggle/:id/:state' // state = 1 or 0 (finished or opened)
   },
-  // finish: {
-  //   name: 'finish',
-  //   path: '/finish/:id'
-  // },
-  // open: {
-  //   name: 'open',
-  //   path: '/open/:id'
-  // },
   deleteerror: {
     name: 'deleteerror',
     path: '/delete/error',

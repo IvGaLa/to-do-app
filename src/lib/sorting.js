@@ -1,7 +1,24 @@
+/**
+ * 
+ * Librería para manejar la ordenación de las tareas.
+ * 
+ */
+
 import { DateTime } from "luxon";
 
 import { getLocale } from "@locales/es";
 
+
+/**
+ * Ordena por el campo de tipo texto.
+ * 
+ * Recibe un objeto como propiedades que debe contener
+ * tasks: Las tareas a ordenar
+ * orderBy: El campo por el que queremos ordenar
+ * sortOrder: El "sentido" de la ordenación (Asc/Desc)
+ * setSortOrder: Setea sortOrder
+ * 
+ */
 const sortByText = {
   sorting: (props) => {
     const { tasks, orderBy, sortOrder, setSortOrder } = props
@@ -18,6 +35,17 @@ const sortByText = {
   },
 };
 
+
+/**
+ * Ordena por el campo de tipo fecha.
+ * 
+ * Recibe un objeto como propiedades que debe contener
+ * tasks: Las tareas a ordenar
+ * orderBy: El campo por el que queremos ordenar
+ * sortOrder: El "sentido" de la ordenación (Asc/Desc)
+ * setSortOrder: Setea sortOrder
+ * 
+ */
 const sortByDate = {
   sorting: (props) => {
     const { tasks, orderBy, sortOrder, setSortOrder } = props
@@ -47,8 +75,8 @@ const sortByDate = {
   },
 };
 
+// Cada llave:valor corresponde con un campo de la base de datos/tabla seleccionada a ordenar.
 const sortFunctions = {
-  // Cada llave:valor corresponde con un campo de la base de datos/tabla seleccionada a ordenar.
   title: sortByText,
   description: sortByText,
   createdAt: sortByDate,

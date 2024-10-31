@@ -1,3 +1,9 @@
+/**
+ * 
+ * Librería de utilidades para manejar fechas.
+ * 
+ */
+
 import { DateTime } from "luxon";
 
 /**
