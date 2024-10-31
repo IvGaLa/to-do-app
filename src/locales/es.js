@@ -11,6 +11,7 @@ import { add } from "@locales/components/content/add";
 import { list } from "@locales/components/content/list";
 import { modify } from "@locales/components/content/modify";
 import { _delete } from "@locales/components/content/delete";
+import { notfound } from "@locales/components/content/notfound";
 
 import { tasks } from "@locales/components/models/tasks";
 
@@ -39,7 +40,8 @@ const locale = {
       add,
       list,
       modify,
-      delete: _delete
+      delete: _delete,
+      notfound
     }
   }
 }
