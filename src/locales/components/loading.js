@@ -1,3 +1,3 @@
 export const loading = {
-  loadingtext: 'Cargando...'
+  LoadingText: 'Cargando...'
 }

@@ -16,6 +16,8 @@ import { notfound } from "@locales/components/content/notfound";
 import { tasks } from "@locales/components/models/tasks";
 
 
+const replaceVar = ':replace:'
+
 // Guardamos todos los textos disponibles en la aplicación
 const locale = {
   generic: 'undefinied_text',
@@ -49,8 +51,8 @@ const locale = {
 
 // Devuelve el valor de locale según la clave pasada por parámetro.
 // Si no se le pasa clave o la clave pasada no existe devuelve el texto "generic" que se haya definido arriba
-export const getLocale = (param = 'generic') => {
-  if (param === 'generic') return locale.generic
+export const getLocale = (param = 'generic', replacements = []) => {
+  if (param === 'generic') return locale.generic;
 
   const keys = param.split('.'); // Divide la ruta por '.'
   let result = locale;
@@ -58,10 +60,15 @@ export const getLocale = (param = 'generic') => {
   // Recorre los niveles del objeto usando las claves
   for (const key of keys) {
     result = result[key];
-    // Si la clave es undefinied, devolvemos la clave genérica.
-    if (result === undefined) return locale.generic
+    // Si la clave es undefined, devolvemos la clave genérica.
+    if (result === undefined) return locale.generic;
   }
 
-  return result;
-}
+  // Si no le pasamos un array para reemplazar valores, salimos con lo que tenemos.
+  if (replacements.length == 0) return result
 
+  // Crear una expresión regular usando replaceVar de forma dinámica
+  const regex = new RegExp(replaceVar, 'g');
+  let index = 0;
+  return result.replace(regex, () => replacements[index++] || replaceVar);
+};

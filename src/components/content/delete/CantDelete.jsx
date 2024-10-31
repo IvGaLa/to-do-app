@@ -7,7 +7,7 @@
 import { getLocale } from "@locales/es";
 
 function CantDelete() {
-  return <div>{getLocale("components.content.delete.cantdelete")}</div>;
+  return <div>{getLocale("components.content.delete.cantDelete")}</div>;
 }
 
 export default CantDelete;

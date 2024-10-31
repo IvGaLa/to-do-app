@@ -153,18 +153,19 @@ function Form({ setResultAdd }) {
     columnsText,
     validationErrors,
     handleInputChange,
-    buttonText: getLocale("components.content.add.addbutton"),
+    buttonText: getLocale("components.content.add.addButton"),
   };
 
   return (
     <div>
       <h3 className="mb-6">
         {newUserId
-          ? getLocale("components.content.add.newuserid")
-          : getLocale("components.content.add.userid")}
-        <span className="px-3 font-bold">
-          {formData[initialFields.user.name].value}
-        </span>
+          ? getLocale("components.content.add.newUserId", [
+              formData[initialFields.user.name].value,
+            ])
+          : getLocale("components.content.add.userId", [
+              formData[initialFields.user.name].value,
+            ])}
       </h3>
 
       <FormTask formProps={formProps} />

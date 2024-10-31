@@ -58,7 +58,7 @@ function Delete() {
         <ConfirmDelete task={taskToDelete} />
       ) : (
         <p>
-          {getLocale("components.content.delete.tasknotfound")} {id}
+          {getLocale("components.content.delete.taskNotFound")} {id}
         </p>
       )}
     </div>

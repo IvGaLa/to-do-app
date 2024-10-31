@@ -16,7 +16,7 @@ function PspanDateTime({ name, value }) {
       name={name}
       value={
         formatDataTime(value, getLocale("formatdatetimetoview")) ||
-        getLocale("components.content.delete.datetimewithoutvalue")
+        getLocale("components.content.delete.datetimeWithoutValue")
       }
     />
   );

@@ -67,13 +67,13 @@ function List() {
         <TaskCard tasks={tasks} setTasks={setTasks} />
       ) : (
         <div>
-          <p>{getLocale("components.content.list.withouttasks")}</p>
+          <p>{getLocale("components.content.list.withoutTasks")}</p>
           <p>
-            {getLocale("components.content.list.click")}{" "}
+            {getLocale("components.content.list.clickHereToAddNewTask1")}{" "}
             <Link to={routes.add.path}>
-              {getLocale("components.content.list.here")}
+              {getLocale("components.content.list.clickHereToAddNewTask2")}
             </Link>{" "}
-            {getLocale("components.content.list.addnewtask")}
+            {getLocale("components.content.list.clickHereToAddNewTask3")}
           </p>
         </div>
       )}

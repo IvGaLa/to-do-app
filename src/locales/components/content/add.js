@@ -1,8 +1,8 @@
 export const add = {
   title: 'Añadir tarea',
-  addbutton: 'Añadir tarea',
-  userid: 'Tu id de usuario es: ',
-  newuserid: 'Hemos detectado que no tienes id de usuario creado, por lo que hemos generado uno nuevo: ',
-  addedtask: 'Añadida tarea: ',
-  addnewtask: 'Añadir nueva tarea',
+  addButton: 'Añadir tarea',
+  userId: 'Tu id de usuario es: :replace:',
+  newUserId: 'Hemos detectado que no tienes id de usuario creado, por lo que hemos generado uno nuevo: ',
+  addedTask: 'Añadida tarea: :replace:',
+  addNewTask: 'Añadir nueva tarea',
 }

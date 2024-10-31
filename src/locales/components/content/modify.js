@@ -1,5 +1,5 @@
 export const modify = {
-  title: "Modifica una tarea",
+  title: 'Modificar tarea',
   toggleFinished: 'Tarea finalizada correctamente.',
   toggleFinishedError: "Ha habido un error al finalizar la tarea.",
   toggleOpened: "Tarea abierta correctamente.",
