@@ -14,7 +14,7 @@ import { Tasks } from "@models/Tasks";
 
 import FormTask from "@components/form/FormTask";
 import Loading from "@components/Loading";
-import Updated from "@components/content/modify/Updated";
+import SetMessage from "@components/content/modify/SetMessage";
 
 function ModifyForm({ task }) {
   const initialFields = tasks.fields;
@@ -118,15 +118,19 @@ function ModifyForm({ task }) {
     initialFields[initialFields.description.name],
   ];
 
-  return (
-    <>
-      {formProps && formData ? (
-        <>{updated ? <Updated /> : <FormTask formProps={formProps} />}</>
-      ) : (
-        <Loading />
-      )}
-    </>
-  );
+  // Si estamos en estado de carga, mostramos el componente Loading
+  if (!formProps || !formData) return <Loading />;
+
+  // Si estamos en estado de actualizado, mostramos el componente Updated
+  if (updated)
+    return (
+      <SetMessage>
+        {getLocale("components.content.modify.taskUpdated")}
+      </SetMessage>
+    );
+
+  // Mostramos el formulario.
+  return <FormTask formProps={formProps} />;
 }
 
 export default ModifyForm;

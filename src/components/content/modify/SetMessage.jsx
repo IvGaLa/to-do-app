@@ -4,21 +4,16 @@
  *
  */
 
-import { getLocale } from "@locales/es";
+import ButtonBackToList from "@components/ButtonBackToList";
 
-function SetMessage({ backToList, children, color }) {
+function SetMessage({ children, color }) {
   return (
-    <>
-      <h2 className={`text-xl font-semibold text-${color}-600 mb-4`}>
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
         {children}
-      </h2>
-      <button
-        className={`bg-${color}-500 text-white py-2 px-4 rounded hover:bg-${color}-600 focus:outline-none focus:ring-2 focus:ring-${color}-400`}
-        onClick={backToList}
-      >
-        {getLocale("components.content.modify.backToList")}
-      </button>
-    </>
+        <ButtonBackToList color={color} />
+      </div>
+    </div>
   );
 }
 
