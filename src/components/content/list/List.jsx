@@ -57,30 +57,27 @@ function List() {
     setTasks(rows);
   };
 
+  // Si estamos en estado de carga, mostramos el componente de carga
+  if (isLoading) return <Loading />;
+
   return (
-    <>
-      {isLoading ? (
-        <Loading />
+    <div>
+      <TitlePage>{getLocale("components.content.list.title")}</TitlePage>
+      {tasks.length !== 0 ? (
+        <TaskCard tasks={tasks} setTasks={setTasks} />
       ) : (
         <div>
-          <TitlePage>{getLocale("components.content.list.title")}</TitlePage>
-          {tasks.length !== 0 ? (
-            <TaskCard tasks={tasks} setTasks={setTasks} />
-          ) : (
-            <div>
-              <p>{getLocale("components.content.list.withouttasks")}</p>
-              <p>
-                {getLocale("components.content.list.click")}{" "}
-                <Link to={routes.add.path}>
-                  {getLocale("components.content.list.here")}
-                </Link>{" "}
-                {getLocale("components.content.list.addnewtask")}
-              </p>
-            </div>
-          )}
+          <p>{getLocale("components.content.list.withouttasks")}</p>
+          <p>
+            {getLocale("components.content.list.click")}{" "}
+            <Link to={routes.add.path}>
+              {getLocale("components.content.list.here")}
+            </Link>{" "}
+            {getLocale("components.content.list.addnewtask")}
+          </p>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
