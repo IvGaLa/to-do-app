@@ -1,3 +1,9 @@
+/**
+ * 
+ * Variables para el locale del componente List
+ * 
+ */
+
 export const list = {
   title: 'Listado de tareas',
   withoutTasks: 'Aún no dispones de tareas creadas.',

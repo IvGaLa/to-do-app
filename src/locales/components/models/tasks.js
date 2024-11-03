@@ -1,3 +1,9 @@
+/**
+ * 
+ * Variables para el locale de los labels del modelo Tasks
+ * 
+ */
+
 export const tasks = {
   label: {
     id: 'Id',

@@ -1,21 +1,27 @@
+/**
+ * 
+ * Gestionamos los locales
+ * 
+ */
+
 import { localstorage } from "@locales/localstorage";
 
 import { errors } from "@locales/validations.errors";
+
+import { tasks } from "@locales/components/models/tasks";
 
 import { home } from "@locales/components/home";
 import { footer } from "@locales/components/footer";
 import { header } from "@locales/components/header";
 import { loading } from "@locales/components/loading";
-
 import { add } from "@locales/components/content/add";
 import { list } from "@locales/components/content/list";
 import { modify } from "@locales/components/content/modify";
 import { _delete } from "@locales/components/content/delete";
 import { notfound } from "@locales/components/content/notfound";
 
-import { tasks } from "@locales/components/models/tasks";
 
-
+// Guarda el string por el que se debe sustituir en el getLocale los valores pasados por parámetros.
 const replaceVar = ':replace:'
 
 // Guardamos todos los textos disponibles en la aplicación

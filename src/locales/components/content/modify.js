@@ -1,3 +1,9 @@
+/**
+ * 
+ * Variables para el locale del componente Modify
+ * 
+ */
+
 export const modify = {
   title: 'Modificar tarea',
   toggleFinished: 'Tarea finalizada correctamente.',

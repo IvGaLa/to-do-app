@@ -1,3 +1,9 @@
+/**
+ * 
+ * Variables para el locale del componente Add
+ * 
+ */
+
 export const add = {
   title: 'Añadir tarea',
   addButton: 'Añadir tarea',

@@ -1,3 +1,13 @@
+/**
+ * 
+ * Variables para el locale para los mensajes de error de las validaciones del formulario.
+ * 
+ */
+
+/**
+ * %field%: Hace referencia al label del campo del formulario
+ * %value%: Hace referencia al valor a validar del campo que se ha enviado en el formulario
+ */
 export const errors = {
   required: 'El campo %field% es obligatorio.',
   integer: 'El campo %field% debe ser un número.',

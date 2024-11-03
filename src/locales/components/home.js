@@ -1,3 +1,9 @@
+/**
+ * 
+ * Variables para el locale del componente Home
+ * 
+ */
+
 export const home = {
   title: 'Bienvenido a :replace:',
   textDescription: 'Esta aplicación ha sido desarrollada para simplificar la organización de tareas, permitiendo crear, modificar y gestionar tus pendientes de forma rápida y eficiente.Aprovecha esta herramienta para mantenerte al día en tus proyectos y alcanzar tus metas.',
